@@ -1,5 +1,5 @@
 <template>
-  <div class="underconstruction">Hallo</div>
+  <div class="underconstruction">Hallo VMC</div>
 </template>
 
 <script>
