@@ -4,8 +4,6 @@
       id="carousel-1"
       v-model="slide"
       :interval="4000"
-      controls
-      indicators
       background="#ababab"
       img-width="1024"
       img-height="480"
@@ -13,48 +11,28 @@
       @sliding-start="onSlideStart"
       @sliding-end="onSlideEnd"
     >
-      <!-- Text slides with image -->
-      <b-carousel-slide
-        caption="First slide"
-        text="Nulla vitae elit libero, a pharetra augue mollis interdum."
-        img-src="https://picsum.photos/1024/480/?image=52"
-      ></b-carousel-slide>
-
-      <!-- Slides with custom text -->
-      <b-carousel-slide img-src="https://picsum.photos/1024/480/?image=54">
-        <h1>Hello world!</h1>
-      </b-carousel-slide>
-
-      <!-- Slides with image only -->
-      <b-carousel-slide
-        img-src="https://picsum.photos/1024/480/?image=58"
-      ></b-carousel-slide>
-
-      <!-- Slides with img slot -->
-      <!-- Note the classes .d-block and .img-fluid to prevent browser default image alignment -->
-      <b-carousel-slide>
+      <b-carousel-slide v-for="item in [1, 2, 3, 4]" :key="item">
         <template #img>
+          <h1 class="judul">WE'RE LAUNCHING SOON</h1>
+          <p class="desc1">
+            Please kindly wait for us. We're doing a super great job here and we
+            need time to construct it :(
+          </p>
+          <p class="desc2">
+            Don't leave us pwis, we will provide you something exciting nyaa :3
+          </p>
+          <p class="desc3">Stay connected</p>
+          <p class="desc4">©2020. All right reserved</p>
           <img
             class="d-block img-fluid w-100"
             width="1024"
             height="480"
-            src="https://picsum.photos/1024/480/?image=55"
+            :src="require(`~/assets/undercontruct${item}.png`)"
             alt="image slot"
           />
         </template>
       </b-carousel-slide>
-
-      <!-- Slide with blank fluid image to maintain slide aspect ratio -->
-      <b-carousel-slide caption="Blank Image" img-blank img-alt="Blank image">
-        <p>
-          Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse
-          eros felis, tincidunt a tincidunt eget, convallis vel est. Ut
-          pellentesque ut lacus vel interdum.
-        </p>
-      </b-carousel-slide>
     </b-carousel>
-
-    <div class="judul">WE'RE LAUNCHING SOON</div>
   </div>
 </template>
 
@@ -92,4 +70,73 @@ export default {
   display flex
   align-items center
   justify-content center
+  font-size 60px
+  font oblique normal 900 60px/17px futura-pt
+  letter-spacing 15px
+  color #2D4957
+  opacity 1
+
+.desc1
+  position absolute
+  top 80px
+  left 100px
+  right 100px
+  bottom 0
+  height 100vh
+  display flex
+  align-items center
+  justify-content center
+  font-size 50px
+  font 18px/17px segoe-ui
+  letter-spacing 1.8px
+  color #2D4957
+  opacity 1
+
+.desc2
+  position absolute
+  top 110px
+  left 100px
+  right 100px
+  bottom 0
+  height 100vh
+  display flex
+  align-items center
+  justify-content center
+  font-size 50px
+  font 18px/17px segoe-ui
+  letter-spacing 1.8px
+  color #2D4957
+  opacity 1
+
+.desc3
+  position absolute
+  top 260px
+  left 100px
+  right 100px
+  bottom 0
+  height 100vh
+  display flex
+  align-items center
+  justify-content center
+  font-size 50px
+  font 18px/17px segoe-ui
+  letter-spacing 1.8px
+  color #2D4957
+  opacity 1
+
+.desc4
+  position absolute
+  top 450px
+  left 100px
+  right 100px
+  bottom 0
+  height 100vh
+  display flex
+  align-items center
+  justify-content center
+  font-size 50px
+  font 15px/17px futura-pt
+  letter-spacing 1.2px
+  color #000000
+  opacity 1
 </style>
