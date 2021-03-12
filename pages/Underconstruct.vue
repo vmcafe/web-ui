@@ -41,13 +41,13 @@
             alt="image slot"
           />
           <div class="footer_list_media">
-            <a href="/" target="blank" class="footer_listmedia_item">
+            <a href="/" target="blank" class="footer_listmedia_item1">
               <img src="~/assets/icons/ic_fb.svg" alt="" />
             </a>
-            <a href="/" target="blank" class="footer_listmedia_item">
+            <a href="/" target="blank" class="footer_listmedia_item2">
               <img src="~/assets/icons/ic_ig.svg" alt="" />
             </a>
-            <a href="/" target="blank" class="footer_listmedia_item">
+            <a href="/" target="blank" class="footer_listmedia_item3">
               <img src="~/assets/icons/linkedin.svg" alt="" />
             </a>
           </div>
@@ -141,7 +141,7 @@ export default {
 
 .desc3
   position absolute
-  top 160px
+  top 210px
   left 0
   right 0
   bottom 0
@@ -157,7 +157,7 @@ export default {
 
 .desc4
   position absolute
-  top 270px
+  top 350px
   left 0
   right 0
   bottom 0
@@ -171,14 +171,18 @@ export default {
   color #000000
   opacity 1
 
-.footer_listmedia_item
+.footer_listmedia_item1
   position absolute
-  top 190px
-  left 0
-  right 0
-  bottom 0
-  height 100vh
-  display flex
-  align-items center
-  justify-content center
+  top 610px
+  margin-left 725px
+
+.footer_listmedia_item2
+  position absolute
+  top 610px
+  margin-left 755px
+
+.footer_listmedia_item3
+  position absolute
+  top 610px
+  margin-left 788px
 </style>
