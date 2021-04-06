@@ -1,15 +1,17 @@
 <template>
   <div>
     <b-spinner v-if="isLoading" variant="primary" label="Spinning"></b-spinner>
-    <div v-else class="login">
+    <div v-else class="login mr-5">
       <div v-if="isSuccess" class="forget d-flex flex-colum">
         <div
           class="container p-4"
           style="color: #ffffff; background: #5b617b; max-width: 692px"
         >
-          <Heading style="color: #ffffff">Silahkan Cek Email Kamu! ^_^</Heading>
+          <Heading class="text_after_input_email" style="color: #ffffff"
+            >Silahkan Cek Email Kamu! ^_^</Heading
+          >
           <div
-            class="mt-4"
+            class="text_after_input_email_content mt-4"
             style="letter-spacing: -0.15px; line-height: 28px; font-size: 18px"
           >
             Kami telah mengirimkan tautan untuk mengubah password Anda melalui
@@ -22,9 +24,9 @@
       <div v-else class="login__container container">
         <div class="login__container__mail mail">
           <Heading class="mail__heading">Lupa kata kunci?</Heading>
-          <form @submit.stop.prevent="onSubmit()" class="mail__form">
+          <form class="mail__form" @submit.stop.prevent="onSubmit()">
             <div
-              class="mb-5"
+              class="text_lupa_kata_kunci mb-4"
               style="
                 letter-spacing: -0.15px;
                 line-height: 28px;
@@ -36,7 +38,7 @@
               ada di dalam email untuk prosedur selanjutnya.
             </div>
             <Field
-              class="w-100 mb-1"
+              class="input__email w-100 mb-1"
               type="email"
               placeholder="EMAIL"
               :value="$v.form.email.$model"
@@ -46,7 +48,7 @@
             <Button
               type="submit"
               align="center"
-              class="form__submit mt-1 h-16 mb-5 w-100"
+              class="form__submit mt-1 h-16 mb-5 mr-2 w-100"
               >LUPA KATA KUNCI</Button
             >
           </form>
@@ -117,4 +119,46 @@ export default {
     .mail
       &__heading
         margin-bottom 56px
+
+.text_after_input_email
+  text-align center
+  font-size 32px
+  font-weight bold
+  font normal normal Futura PT
+  letter-spacing -0.21px
+  color #FCFCFC
+
+.text_after_input_email_content
+  font-size 22px
+  font: normal normal Proxima Nova
+  text-align justify
+  letter-spacing -0.15px
+  color #FCFCFC
+
+.mail__heading
+  text-align center
+  font-size 22px
+  font-weight bold
+  font normal normal Futura PT
+  letter-spacing 0.21px
+  color #000000
+
+.text_lupa_kata_kunci
+  font-size 22px
+  font normal normal Proxima Nova
+  text-align justify
+  letter-spacing -0.15px
+  color #000000
+
+.input__email
+  text-align left
+  font normal normal Futura PT
+  letter-spacing 3px
+  color #000000
+
+.form__submit
+  text-align center
+  font normal normal  Futura PT
+  letter-spacing 3px
+  color #FFFFFF
 </style>

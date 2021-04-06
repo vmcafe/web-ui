@@ -13,44 +13,38 @@
     >
       <b-carousel-slide v-for="item in [1, 2, 3, 4]" :key="item">
         <template #img>
-          <div class="logo-underconstruct">
-            <img
-              class="logo d-block mx-auto"
-              width="170"
-              height="170"
-              src="~/assets/Logo2.png"
-              alt=""
-            />
-          </div>
-
-          <h1 class="judul mx-auto">WE'RE LAUNCHING SOON</h1>
-          <p class="desc1 mx-auto">
+          <img
+            class="logo__vmc d-block img-fluid mx-auto"
+            src="~/assets/Logo2.png"
+            alt=""
+          />
+          <h1 class="carousel__title text-center ml-2 mr-2">
+            WE'RE LAUNCHING SOON
+          </h1>
+          <p class="carousel__content text-center mb-2 ml-2 mr-2">
             Please kindly wait for us. We're doing a super great job here and we
             need time to construct it :(
-          </p>
-          <p class="desc2 mx-auto">
+            <br />
             Don't leave us pwis, we will provide you something exciting nyaa :3
           </p>
-          <p class="desc3 mx-auto">Stay connected</p>
-          <p class="desc4 mx-auto">©2020. All right reserved</p>
+          <p class="carousel__media">Stay connected</p>
+          <div class="carousel__media__list">
+            <a href="/" target="blank">
+              <img src="~/assets/icons/ic_fb.svg" alt="" class="mr-2" />
+            </a>
+            <a href="/" target="blank">
+              <img src="~/assets/icons/ic_ig.svg" alt="" class="mr-2" />
+            </a>
+            <a href="/" target="blank">
+              <img src="~/assets/icons/linkedin.svg" alt="" class="mr-2" />
+            </a>
+          </div>
+          <p class="carousel__copyright">©2021. All right reserved</p>
           <img
-            class="d-block img-fluid w-100"
-            width="1024"
-            height="480"
+            class="carousel__img d-block img-fluid w-100"
             :src="require(`~/assets/undercontruct${item}.png`)"
             alt="image slot"
           />
-          <div class="footer_list_media">
-            <a href="/" target="blank" class="footer_listmedia_item1">
-              <img src="~/assets/icons/ic_fb.svg" alt="" />
-            </a>
-            <a href="/" target="blank" class="footer_listmedia_item2">
-              <img src="~/assets/icons/ic_ig.svg" alt="" />
-            </a>
-            <a href="/" target="blank" class="footer_listmedia_item3">
-              <img src="~/assets/icons/linkedin.svg" alt="" />
-            </a>
-          </div>
         </template>
       </b-carousel-slide>
     </b-carousel>
@@ -78,111 +72,170 @@ export default {
 
 <style lang="stylus" scoped>
 @import '../styles/imports'
-.underconstruct
-  position relative
 
-.logo
-  top 20px
-  left 0
-  right 0
-  bottom 0
-  display flex
-  position absolute
-  align-items center
-  justify-content center
-
-.judul
-  position absolute
-  top -40px
-  left 0
-  right 0
-  bottom 0
-  height 100vh
-  display flex
-  align-items center
-  justify-content center
-  font-size 60px
-  font oblique normal 900 60px/17px futura-pt
-  letter-spacing 15px
-  color #2D4957
-  opacity 1
-
-.desc1
+.logo__vmc
   position absolute
   top 20px
   left 0
   right 0
   bottom 0
-  height 100vh
+  height 150px
+  width 150px
   display flex
   align-items center
   justify-content center
-  font-size 18px
-  font normal normal segoe-ui
-  letter-spacing 1.8px
-  color #2D4957
-  opacity 1
 
-.desc2
-  position absolute
-  top 45px
-  left 0
-  right 0
-  bottom 0
+.carousel__img
   height 100vh
-  display flex
-  align-items center
-  justify-content center
-  font-size 18px
-  font normal normal segoe-ui
-  letter-spacing 1.8px
-  color #2D4957
-  opacity 1
 
-.desc3
-  position absolute
-  top 210px
-  left 0
-  right 0
-  bottom 0
-  height 100vh
-  display flex
-  align-items center
-  justify-content center
-  font-size 18px
-  font normal normal segoe-ui
-  letter-spacing 1.8px
-  color #2D4957
-  opacity 1
+@media (min-width 256px)
+  .carousel__title
+    position absolute
+    top -90px
+    left 0
+    right 0
+    bottom 0
+    height 100vh
+    display flex
+    align-items center
+    justify-content center
+    font-size 15px
+    font oblique normal 600 15px/17px futura-pt
+    letter-spacing 5px
+    color #2D4957
+    opacity 1
 
-.desc4
-  position absolute
-  top 350px
-  left 0
-  right 0
-  bottom 0
-  height 100vh
-  display flex
-  align-items center
-  justify-content center
-  font-size 50px
-  font 15px/17px futura-pt
-  letter-spacing 1.2px
-  color #000000
-  opacity 1
+  .carousel__content
+    position absolute
+    top -30px
+    left 0
+    right 0
+    bottom 0
+    height 100vh
+    display flex
+    align-items center
+    justify-content center
+    font-size 11px
+    font normal normal segoe-ui
+    letter-spacing 1.8px
+    color #2D4957
+    opacity 1
 
-.footer_listmedia_item1
-  position absolute
-  top 610px
-  margin-left 725px
+  .carousel__media
+    position absolute
+    top 90px
+    left 0
+    right 0
+    bottom 0
+    height 100vh
+    display flex
+    align-items center
+    justify-content center
+    font-size 11px
+    font normal normal segoe-ui
+    letter-spacing 1.8px
+    color #2D4957
+    opacity 1
 
-.footer_listmedia_item2
-  position absolute
-  top 610px
-  margin-left 755px
+  .carousel__media__list
+    position absolute
+    top 120px
+    left 50px
+    right 50px
+    height 100vh
+    display flex
+    align-items center
+    justify-content center
 
-.footer_listmedia_item3
-  position absolute
-  top 610px
-  margin-left 788px
+  .carousel__copyright
+    position absolute
+    top 270px
+    left 0
+    right 0
+    bottom 0
+    height 100vh
+    display flex
+    align-items center
+    justify-content center
+    font-size 9px
+    font normal normal futura-pt
+    letter-spacing 1.2px
+    color #000000
+    opacity 1
+
+@media (min-width 1024px)
+  .carousel__title
+    position absolute
+    top -50px
+    left 0
+    right 0
+    bottom 0
+    height 100vh
+    display flex
+    align-items center
+    justify-content center
+    font-size 60px
+    font oblique normal 600 60px/17px futura-pt
+    letter-spacing 5px
+    color #2D4957
+    opacity 1
+
+  .carousel__content
+    position absolute
+    top 30px
+    left 50px
+    right 50px
+    bottom 0
+    height 100vh
+    display flex
+    align-items center
+    justify-content center
+    font-size 18px
+    font normal normal segoe-ui
+    letter-spacing 1.8px
+    line-height 30px
+    color #2D4957
+    opacity 1
+
+  .carousel__media
+    position absolute
+    top 120px
+    left 0
+    right 0
+    bottom 0
+    height 100vh
+    display flex
+    align-items center
+    justify-content center
+    font-size 18px
+    font normal normal segoe-ui
+    letter-spacing 1.8px
+    color #2D4957
+    opacity 1
+
+  .carousel__media__list
+    position absolute
+    top 150px
+    left 50px
+    right 50px
+    height 100vh
+    display flex
+    align-items center
+    justify-content center
+
+  .carousel__copyright
+    position absolute
+    top 270px
+    left 0
+    right 0
+    bottom 0
+    height 100vh
+    display flex
+    align-items center
+    justify-content center
+    font-size 11px
+    font normal normal futura-pt
+    letter-spacing 1.2px
+    color #262626
+    opacity 1
 </style>

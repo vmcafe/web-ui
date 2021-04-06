@@ -1,5 +1,5 @@
 <template>
-  <div class="radio h-16">
+  <div class="radio">
     <label v-for="item in options" :key="item.id" :for="`option${item.id}`">
       <input
         :id="`option${item.id}`"
@@ -58,17 +58,20 @@ export default {
 <style lang="stylus" scoped>
 @import '../../styles/imports';
 .radio
+  max-height 48px
   min-width 100px
-  font-size 13px
+  font-size 11px
   color blackText
   padding 20px
-  border #fff solid 1px
+  border #fff solid 3px
   transition all 0.2s
   background whiteMustard
   display flex
   align-items center
   justify-content space-between
-
+  font normal normal Futura PT
+  letter-spacing 3.25px
+  box-shadow 0px 1px 6px #00000029
 
   &__field
     display none
@@ -86,7 +89,9 @@ export default {
     margin-top 2px
 
     &__selected
-      width 50%
+      margin-top -2px
+      width 100%
+      height 6px
 
   &:focus
   &:active

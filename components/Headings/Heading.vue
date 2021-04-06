@@ -14,6 +14,6 @@ export default {}
   text-align center
   letter-spacing -0.21px
   color blackMamba
-  font-size 24px
-  font-weight 500
+  font-size 19px
+  font normal normal medium 32px/41px Futura PT
 </style>

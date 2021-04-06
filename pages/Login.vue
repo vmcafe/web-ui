@@ -4,12 +4,44 @@
     <div v-else class="login">
       <div class="login__container container">
         <div class="login__container__mail mail">
+          <Heading class="sso__heading">Masuk dengan</Heading>
+          <div class="container w-100">
+            <div class="row">
+              <SingleSignOn
+                type="button"
+                align="center"
+                class="btn_sso col-12 col-md-6 mb-1 mx-auto"
+              >
+                <b-img
+                  left
+                  class="sso_btn_icon my-auto"
+                  src="~/assets/icons/ic_facebook.svg"
+                  alt="icon facebook"
+                ></b-img>
+                FACEBOOK</SingleSignOn
+              >
+              <SingleSignOn
+                type="button"
+                align="center"
+                class="btn_sso col-12 col-md-6 mb-1 mx-auto"
+              >
+                <b-img
+                  left
+                  class="sso_btn_icon"
+                  src="~/assets/icons/ic_google.svg"
+                  alt="icon google"
+                ></b-img>
+                GOOGLE</SingleSignOn
+              >
+            </div>
+          </div>
+          <div class="atau__heading">ATAU</div>
           <Heading class="mail__heading">Masuk dengan email</Heading>
-          <form @submit.prevent="onSubmit()" class="mail__form">
+          <form class="mail__form" @submit.prevent="onSubmit()">
             <div class="container w-100">
               <div class="row">
                 <Field
-                  class="col-12 col-md-6 mb-1"
+                  class="col-12 col-md-6 mb-1 field_input_mail mx-auto"
                   type="email"
                   placeholder="EMAIL"
                   :value="$v.form.email.$model"
@@ -17,7 +49,7 @@
                   @model="$v.form.email.$model = $event"
                 />
                 <Field
-                  class="col-12 col-md-6 mb-1"
+                  class="col-12 col-md-6 mb-1 field_input_mail mx-auto"
                   type="password"
                   placeholder="PASSWORD"
                   :value="$v.form.password.$model"
@@ -29,12 +61,12 @@
             <Button
               type="submit"
               align="center"
-              class="form__submit w-full mt-1 h-16 mb-5 w-100"
+              class="form__submit w-full mt-1 mb-4 w-100"
               >MASUK</Button
             >
           </form>
           <nuxt-link to="/forgotpassword">
-            <TextLink class="mb-4">LUPA KATA KUNCI?</TextLink>
+            <TextLink class="lupa_kata_kunci mb-4">LUPA KATA KUNCI?</TextLink>
           </nuxt-link>
           <Heading class="mb-2">Belum punya akun?</Heading>
           <nuxt-link to="/register">
@@ -53,12 +85,12 @@
     >
       <div class="d-flex flex-column align-items-center justify-content-center">
         <img
-          style="width: 124px"
           v-if="isSuccess"
+          style="width: 124px"
           src="~/assets/success.png"
           alt=""
         />
-        <img style="width: 124px" v-else src="~/assets/failed.png" alt="" />
+        <img v-else src="~/assets/failed.png" style="width: 124px" alt="" />
         <Heading class="mt-2">
           {{ isSuccess ? 'Berhasil Masuk!' : 'Gagal Masuk!' }}
         </Heading>
@@ -71,6 +103,7 @@
 import Heading from '@/components/Headings/Heading'
 import Field from '@/components/Fields/FieldInput'
 import Button from '@/components/Buttons/RightIconBtn'
+import SingleSignOn from '@/components/Buttons/SingleSignOnBtn'
 import TextLink from '@/components/TextLink'
 import { required, email } from 'vuelidate/lib/validators'
 
@@ -80,6 +113,7 @@ export default {
     Field,
     Button,
     TextLink,
+    SingleSignOn,
   },
   layout: 'Auth',
   data() {
@@ -142,5 +176,23 @@ export default {
     &__mail
     .mail
       &__heading
-        margin-bottom 56px
+        margin-bottom 20px
+
+.sso__heading, .atau__heading
+  margin-bottom 20px
+  margin-top 20px
+
+.atau__heading
+  text-align center
+  font-size 11px
+  font normal normal Futura PT
+  letter-spacing 3.25px
+  color #000000
+  opacity 1
+
+.sso_btn_icon
+  width 20px
+  height 20px
+  margin-left 10px
+  margin-top -7px !important
 </style>
