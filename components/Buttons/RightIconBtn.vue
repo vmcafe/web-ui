@@ -16,6 +16,7 @@ export default {
 <style lang="stylus" scoped>
 @import '../../styles/imports';
 .rbtn
+  max-height 48px
   display flex
   align-items center
   background greyDark 0% 0% no-repeat
@@ -23,9 +24,11 @@ export default {
   padding 20px
   color whiteMustard
   position relative
-  font-size 13px
+  font-size 12px
   letter-spacing 3.25px
   transition all 0.25s
+  font normal normal Futura PT
+  letter-spacing 3.25px
 
   &:hover
     background blackText
@@ -35,5 +38,5 @@ export default {
     width 17px
     height 17px
     position absolute
-    right 10px
+    right 20px
 </style>

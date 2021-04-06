@@ -70,7 +70,7 @@
           </nuxt-link>
           <Heading class="mb-2">Belum punya akun?</Heading>
           <nuxt-link to="/register">
-            <TextLink class="mb-4">DAFTAR</TextLink>
+            <TextLink class="mb-5">DAFTAR</TextLink>
           </nuxt-link>
         </div>
       </div>
