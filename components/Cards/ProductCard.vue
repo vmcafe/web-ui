@@ -26,13 +26,19 @@
       src="~/assets/icons/ic_cart.svg"
       alt=""
     />
+    <img
+        v-if="love"
+        class="product__favorite"
+        src="~/assets/heart.png"
+        alt=""
+      />
   </div>
 </template>
 
 <script>
 export default {
   // eslint-disable-next-line vue/require-prop-types
-  props: ['src', 'id', 'name', 'price', 'hot'],
+  props: ['src', 'id', 'name', 'price', 'hot', 'love'],
 }
 </script>
 
@@ -74,4 +80,10 @@ export default {
     bottom 12px
     width 18px
     height 18px
+  
+  &__favorite
+    position absolute
+    left 12px
+    bottom 12px
+    width 18px
 </style>
