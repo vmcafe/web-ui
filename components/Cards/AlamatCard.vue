@@ -1,10 +1,7 @@
 <template>
   <div class="alamat py-5 mx-auto">
-    <div class="alamat__tujuan text-left">
-      {{ tujuan }}
-    </div>
     <div class="alamat__detail text-left">
-      {{ detail }}
+      {{ street }}
     </div>
   </div>
 </template>
@@ -12,7 +9,7 @@
 <script>
 export default {
   // eslint-disable-next-line vue/require-prop-types
-  props: ['tujuan', 'detail'],
+  props: ['street'],
 }
 </script>
 

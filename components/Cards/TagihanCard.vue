@@ -42,7 +42,7 @@
         <div class="rincian__pembayaran__barang">
           <b-row>
             <b-col cols="8" class="rincian__pembayaran__barang__kiri">
-              <p>Total Harga ({{ barang }} barang)</p>
+              <p>Total Harga ({{ jumlah }} barang)</p>
               <p>Total Diskon</p>
               <p>Ongkos Kirim</p>
             </b-col>
@@ -59,7 +59,7 @@
               <p>Total Harga</p>
             </b-col>
             <b-col cols="6" class="total__pembayaran__kanan">
-              <p>Rp{{ total }}</p>
+              <p>Rp{{ harga + diskon + ongkir }}</p>
             </b-col>
           </b-row>
         </div>
@@ -74,24 +74,56 @@
             @click="pilih = !pilih"
             >-Pilih metode pembayaran-</b-button
           >
-          <b-button
-            v-show="pilih"
-            block
-            squared
-            variant="outline-secondary"
-            class="metode__pembayaran__pilihan"
-          >
-            Transfer</b-button
-          >
-          <b-button
-            v-show="pilih"
-            block
-            squared
-            variant="outline-secondary"
-            class="metode__pembayaran__pilihan"
-          >
-            COD</b-button
-          >
+          <div>
+            <b-button
+              v-show="pilih"
+              block
+              squared
+              variant="outline-secondary"
+              class="metode__pembayaran__pilihan mt-1"
+              @click="state = 1"
+            >
+              Transfer</b-button
+            >
+            <div v-if="state == 1">
+              <b-button
+                block
+                squared
+                variant="outline-secondary"
+                class="pilih_bank mx-auto"
+                @click="bank = !bank"
+              >
+                -Pilih Bank-</b-button
+              >
+              <b-button
+                v-for="item in nama_bank"
+                :key="item"
+                v-show="bank"
+                block
+                variant="outline-secondary"
+                class="pilih_bank_bank mx-auto"
+              >
+                {{ item }}</b-button
+              >
+            </div>
+          </div>
+          <div>
+            <b-button
+              v-show="pilih"
+              block
+              squared
+              variant="outline-secondary"
+              class="metode__pembayaran__pilihan mt-1"
+              @click="state = 2"
+            >
+              COD</b-button
+            >
+            <div v-if="state == 2" class="text-center">
+              <b-button squared variant="outline-secondary" class="pilih_bank">
+                COD</b-button
+              >
+            </div>
+          </div>
         </b-button-group>
       </div>
       <div class="button__bayar">
@@ -106,10 +138,14 @@
 <script>
 export default {
   // eslint-disable-next-line vue/require-prop-types
-  props: ['kode', 'barang', 'harga', 'diskon', 'ongkir', 'total'],
+  props: ['kode', 'jumlah', 'harga', 'diskon', 'ongkir'],
   data() {
     return {
       pilih: false,
+      transfer: false,
+      bank: false,
+      state: 0,
+      nama_bank: ['BRI', 'BNI', 'Mandiri'],
     }
   },
 }
@@ -192,6 +228,23 @@ export default {
     font normal normal Futura PT
     letter-spacing 1.5px
     opacity 1
+
+.pilih_bank
+    border 2px solid #ACB3BB
+    font-size 10px
+    width 180px
+    font normal normal Futura PT
+    letter-spacing 1.5px
+
+.pilih_bank_bank
+    border 2px solid #ACB3BB
+    font-size 10px
+    font normal normal Futura PT
+    letter-spacing 1.5px
+    width 150px
+    height 28px
+    border-radius 5px
+    margin-top -2px
 
 .button__bayar
     padding-bottom 24px

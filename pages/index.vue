@@ -36,7 +36,11 @@
         <client-only>
           <swiper class="swiper" :options="swiperOption">
             <swiper-slide v-for="item in dataSource" :key="item">
-              <ProductCard :name="item.name" :price="item.price" />
+              <ProductCard
+                :name="item.name"
+                :price="item.price"
+                @click="count += 1"
+              />
             </swiper-slide>
             <div class="swiper-pagination" slot="pagination"></div>
             <div class="swiper-button-prev" slot="button-prev"></div>
@@ -64,7 +68,7 @@
       <div class="article mb-5">
         <div class="article__heading py-4 pl-2">ARTIKEL TERBARU</div>
         <b-row class="article__content px-5">
-          <b-col v-for="item in [1, 2, 3, 4, 5, 6]" :key="item" sm="12" md="6">
+          <b-col v-for="item in dataArticle" :key="item" sm="12" md="6">
             <ArticleCard />
           </b-col>
         </b-row>
@@ -90,7 +94,9 @@ export default {
   layout: 'Main',
   data() {
     return {
+      count: 0,
       dataSource: null,
+      dataArticle: null,
       swiperOption: {
         slidesPerView: 4,
         slidesPerColumn: 2,
@@ -165,12 +171,21 @@ export default {
   },
   created() {
     this.fetchData()
+    this.fetchArticle()
   },
   methods: {
     async fetchData() {
       try {
         const resp = await this.$axios.$get(`/api/product`)
         this.dataSource = resp.data
+      } catch (error) {
+        console.log(error)
+      }
+    },
+    async fetchArticle() {
+      try {
+        const resp = await this.$axios.$get(`/api/article`)
+        this.dataArticle = resp.data
       } catch (error) {
         console.log(error)
       }

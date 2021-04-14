@@ -11,18 +11,28 @@
     />
     <div class="product__content">
       <div class="product__content__name text-center mb-1 text-truncate">
-        {{ name }}
+        <!-- <nuxt-link :to="'/product/' + id">
+          <TextLink class="lupa_kata_kunci mb-4">{{ name }}</TextLink>
+        </nuxt-link> -->
+        <router-link class="lupa_kata_kunci mb-4" :to="'/product/' + id">{{
+          name
+        }}</router-link>
       </div>
       <div class="product__content__price text-center">{{ price }}</div>
     </div>
-    <img class="product__icon" src="~/assets/icons/ic_cart.svg" alt="" />
+    <img
+      @click="$emit('click')"
+      class="product__icon"
+      src="~/assets/icons/ic_cart.svg"
+      alt=""
+    />
   </div>
 </template>
 
 <script>
 export default {
   // eslint-disable-next-line vue/require-prop-types
-  props: ['src', 'name', 'price', 'hot'],
+  props: ['src', 'id', 'name', 'price', 'hot'],
 }
 </script>
 
@@ -49,8 +59,8 @@ export default {
       line-height 12px
       font-size 16px
       font-family 'futura-pt'
-      font-weight 600
-      letter-spacing 0.35px
+      font-weight 500
+      letter-spacing 0.25px
       color #000000
 
     &__price

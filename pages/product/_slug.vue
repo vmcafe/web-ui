@@ -21,8 +21,11 @@
         </div>
       </b-col>
       <b-col md="7" sm="12" class="pt-5">
-        <h1 class="detail__title text-center h1 font-weight-medium mb-4">
-          Fruity Nastar
+        <h1
+          class="detail__title text-center h1 font-weight-medium mb-4"
+          :data="dataSource"
+        >
+          {{ name }}
         </h1>
         <Variant class="mb-5" :items="variants" :selected="selectedVariant" />
         <b-row>
@@ -30,27 +33,26 @@
             <div
               class="detail__description border-top border-bottom border-dark p-2 mb-3"
             >
-              Kue nastar manis nan lembut berbentuk buah dengan isian selai
-              nanas yang menyegarkan.
+              {{ description }}
             </div>
           </b-col>
           <b-col md="3" sm="12">
             <div class="nettoOrStock p-3 mb-3">
               <div class="nettoOrStock__label mb-1 pb-1">Netto</div>
               <div class="nettoOrStock__value font-italic font-weight-bold">
-                100 g
+                {{ netto }}
               </div>
             </div>
             <div class="nettoOrStock p-3">
               <div class="nettoOrStock__label mb-1 pb-1">Stok</div>
               <div class="nettoOrStock__value font-italic font-weight-bold">
-                100
+                {{ stock }}
               </div>
             </div>
           </b-col>
         </b-row>
         <div class="detail__price text-center font-weight-bold mb-4">
-          Rp 20.000
+          {{ price }}
         </div>
         <b-row>
           <b-col md="3" sm="12">
@@ -123,6 +125,7 @@ export default {
   layout: 'Main',
   data() {
     return {
+      dataSource: null,
       swiperOption: {
         slidesPerView: 5,
         freeMode: true,
@@ -157,6 +160,19 @@ export default {
       ],
       selectedVariant: 1,
     }
+  },
+  created() {
+    this.fetchData()
+  },
+  methods: {
+    async fetchData() {
+      try {
+        const resp = await this.$axios.$get(`/api/product/`)
+        this.dataSource = resp.data
+      } catch (error) {
+        console.log(error)
+      }
+    },
   },
 }
 </script>

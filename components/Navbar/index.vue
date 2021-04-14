@@ -17,23 +17,41 @@
         <b-navbar-nav class="ml-auto">
           <div
             v-if="!openSearch"
-            @click="openSearch = true"
             class="my-auto mx-2"
+            @click="openSearch = true"
           >
             <img src="~/assets/icons/ic_search.svg" alt="" />
           </div>
           <b-nav-form v-else class="mx-2">
-            <b-form-input
+            <!-- <b-form-input
               size="sm"
               class="mr-sm-2"
               placeholder="Cari"
             ></b-form-input>
             <b-button size="sm" class="my-2 my-sm-0" type="submit"
               >Cari</b-button
-            >
+            > -->
+
+            <div class="input-group md-form form-sm form-1 pl-0">
+              <div class="input-group-prepend">
+                <span
+                  id="search"
+                  class="input-group-text"
+                  style="background: #fff"
+                >
+                  <img src="~/assets/icons/ic_search.svg" alt="" />
+                </span>
+              </div>
+              <input
+                class="form-control my-0 py-1"
+                type="text"
+                placeholder="Ingin cari apa?"
+                aria-label="search"
+              />
+            </div>
           </b-nav-form>
 
-          <NavbarItem :withBorder="true" icon="cart">10.000</NavbarItem>
+          <NavbarItemCart :withBorder="true" icon="cart"></NavbarItemCart>
           <client-only>
             <nuxt-link v-if="!isLoggedIn" to="/login">
               <NavbarItem class="my-auto" :withBorder="true" icon="person"
@@ -51,10 +69,10 @@
 
 <script>
 import UserCard from '@/components/UserCard'
-import NavbarItem from './NavbarItem'
+import NavbarItemCart from './NavbarItemCart'
 export default {
   components: {
-    NavbarItem,
+    NavbarItemCart,
     UserCard,
   },
   data() {

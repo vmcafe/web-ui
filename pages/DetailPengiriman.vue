@@ -17,15 +17,11 @@
               <client-only>
                 <swiper class="swiper" :options="swiperOption">
                   <swiper-slide
-                    v-for="item in [1, 2, 3]"
+                    v-for="item in dataAddress"
                     :key="item"
                     class="swiper_slide px-auto"
                   >
-                    <AlamatCard
-                      tujuan="Rumah"
-                      detail="Jl. Kenangan no.69,
-                      Kandangan Kandangan, Kabupaten Kediri 64294"
-                    />
+                    <AlamatCard :street="item.street" />
                   </swiper-slide>
                   <div slot="button-prev" class="swiper-button-prev"></div>
                   <div slot="button-next" class="swiper-button-next"></div>
@@ -60,117 +56,95 @@
               <div class="d-block text-center">
                 <h1 class="judul_tambah_alamat mt-2">Tambah Alamat Baru</h1>
               </div>
-              <div class="form_modal pt-4 pb-2 px-2">
-                <b-form-group class="form_modal_content">
-                  <b-row>
-                    <b-col>
-                      <label
-                        for="nama_alamat"
-                        invalid-feedback="Nama alamat is required"
-                        class="label_modal mb-1"
-                        >Nama alamat</label
-                      >
-                      <b-form-input
-                        id="nama_alamat"
-                        placeholder="Contoh: Rumah. Kosan, Kantor"
-                        type="text"
-                        class="input_modal"
-                        required
-                      ></b-form-input>
-                    </b-col>
-                  </b-row>
-                  <b-row>
-                    <b-col cols="6">
-                      <label
-                        for="nama_penerimma"
-                        invalid-feedback="Nama alamat is required"
-                        class="label_modal mb-1 pt-2"
-                        >Nama penerima</label
-                      >
-                      <b-form-input
-                        id="nama_penerima"
-                        placeholder="Yudistryan Izhar"
-                        type="text"
-                        class="input_modal"
-                        required
-                      ></b-form-input>
-                    </b-col>
-                    <b-col cols="6">
-                      <label
-                        for="no_hp"
-                        invalid-feedback="Nama alamat is required"
-                        class="label_modal mb-1 pt-2"
-                        >No HP</label
-                      >
-                      <b-form-input
-                        id="no_hp"
-                        placeholder="+628131151080"
-                        type="text"
-                        class="input_modal"
-                        required
-                      ></b-form-input>
-                    </b-col>
-                  </b-row>
-                  <b-row>
-                    <b-col cols="8">
-                      <label
-                        for="kec_kota"
-                        invalid-feedback="Nama alamat is required"
-                        class="label_modal mb-1 pt-2"
-                        >Kecamatan / Kota</label
-                      >
-                      <b-form-input
-                        id="kec_kota"
-                        placeholder="Kandangan, Kab. Kediri, Jawa Timur"
-                        type="text"
-                        class="input_modal"
-                        required
-                      ></b-form-input>
-                    </b-col>
-                    <b-col cols="4">
-                      <label
-                        for="kode_pos"
-                        invalid-feedback="Nama alamat is required"
-                        class="label_modal mb-1 pt-2"
-                        >Kode Pos</label
-                      >
-                      <b-form-input
-                        id="kode_pos"
-                        placeholder="642942"
-                        type="text"
-                        class="input_modal"
-                        required
-                      ></b-form-input>
-                    </b-col>
-                  </b-row>
-                  <b-row>
-                    <b-col>
-                      <label
-                        for="alamat"
-                        invalid-feedback="Nama alamat is required"
-                        class="label_modal mb-1 pt-2"
-                        >Alamat</label
-                      >
-                      <b-form-textarea
-                        id="alamat"
-                        placeholder="Jl. Karang kitri no. 52, Kandangan"
-                        type="text"
-                        class="input_modal"
-                        required
-                      ></b-form-textarea>
-                    </b-col>
-                  </b-row>
-                </b-form-group>
-              </div>
+              <form
+                class="form_modal pt-4 pb-2 px-2"
+                @submit.stop.prevent="onSubmit"
+              >
+                <div class="row">
+                  <div class="col-12">
+                    <label
+                      for="nama_penerimma"
+                      class="label_modal col-12 mb-1 pt-2"
+                      >Nama penerima</label
+                    >
+                    <Field
+                      class="col-12 mb-2 field_input"
+                      type="text"
+                      placeholder="Yudistryan Izhar"
+                      :value="$v.form.receiver.$model"
+                      :error="
+                        $v.form.receiver.$dirty && $v.form.receiver.$error
+                      "
+                      @model="$v.form.receiver.$model = $event"
+                    />
+                  </div>
+                  <div class="col-12">
+                    <label for="no_hp" class="label_modal col-12 mb-1 pt-2"
+                      >No HP</label
+                    >
+                    <Field
+                      class="col-12 mb-2 field_input"
+                      type="text"
+                      placeholder="+6283848467748"
+                      :value="$v.form.phone.$model"
+                      :error="$v.form.phone.$dirty && $v.form.phone.$error"
+                      @model="$v.form.phone.$model = $event"
+                    />
+                  </div>
+                  <div class="col-12">
+                    <label for="district" class="label_modal col-12 mb-1 pt-2"
+                      >Kecamatan/Kota</label
+                    >
+                    <Field
+                      class="col-12 mb-2 field_input"
+                      type="text"
+                      placeholder="Kandangan, kab. Kediri, Jawa Timur"
+                      :value="$v.form.district.$model"
+                      :error="
+                        $v.form.district.$dirty && $v.form.district.$error
+                      "
+                      @model="$v.form.district.$model = $event"
+                    />
+                  </div>
+                  <div class="col-12">
+                    <label for="portal_pos" class="label_modal col-12 mb-1 pt-2"
+                      >Kode Pos</label
+                    >
+                    <Field
+                      class="col-12 mb-2 ml-auto field_input"
+                      type="text"
+                      placeholder="642942"
+                      :value="$v.form.portal_pos.$model"
+                      :error="
+                        $v.form.portal_pos.$dirty && $v.form.portal_pos.$error
+                      "
+                      @model="$v.form.portal_pos.$model = $event"
+                    />
+                  </div>
+                  <div class="col-12">
+                    <label for="street" class="label_modal col-12 mb-1 pt-2"
+                      >Alamat</label
+                    >
+                    <Field
+                      class="col-12 mb-4 field_input"
+                      type="text"
+                      placeholder="Jl. Karang kitri no. 52, Kandangan"
+                      :value="$v.form.street.$model"
+                      :error="$v.form.street.$dirty && $v.form.street.$error"
+                      @model="$v.form.street.$model = $event"
+                    />
+                  </div>
+                </div>
 
-              <div class="btn_modal text-center mb-3">
-                <b-button class="btn_tambah_modal" @click="hideModal"
-                  >+ Tambah</b-button
-                >
-                <b-button class="btn_batal_modal" @click="hideModal"
-                  >Batal</b-button
-                >
-              </div>
+                <div class="btn_modal text-center mb-3 mt-2">
+                  <b-button class="btn_tambah_modal" type="submit"
+                    >+ Tambah</b-button
+                  >
+                  <b-button class="btn_batal_modal" @click="hideModal"
+                    >Batal</b-button
+                  >
+                </div>
+              </form>
             </b-modal>
           </div>
 
@@ -185,32 +159,19 @@
                 @click="logistik = !logistik"
                 >Logistik</b-button
               >
+
               <b-button
+                v-for="item in [1]"
+                :key="item"
                 v-show="logistik"
                 squared
                 variant="outline-secondary"
                 class="button_logistik_pilihan2"
               >
-                J&T Regular</b-button
-              >
-              <b-button
-                v-show="logistik"
-                squared
-                variant="outline-secondary"
-                class="button_logistik_pilihan2"
-              >
-                JNE</b-button
-              >
-              <b-button
-                v-show="logistik"
-                squared
-                variant="outline-secondary"
-                class="button_logistik_pilihan2"
-              >
-                Sicepat</b-button
-              >
+                <Delivery>JNE 24.000</Delivery>
+              </b-button>
             </b-button-group>
-            <b-button-group vertical class="button_instan">
+            <!-- <b-button-group vertical class="button_instan">
               <b-button
                 squared
                 variant="outline-secondary"
@@ -239,18 +200,18 @@
                 class="button_instan_pilihan"
                 >Maxim</b-button
               >
-            </b-button-group>
+            </b-button-group> -->
           </div>
 
           <!-- tagihan -->
           <div>
             <TagihanCard
               kode=""
-              barang="3"
-              harga="135.000"
+              jumlah="3"
+              harga="135000"
               diskon="0"
-              ongkir="25.000"
-              total="160.000"
+              ongkir="25000"
+              total=""
             />
           </div>
         </b-col>
@@ -264,6 +225,9 @@ import Navbar from '@/components/Navbar'
 import { Swiper, SwiperSlide } from 'vue-awesome-swiper'
 import AlamatCard from '@/components/Cards/AlamatCard'
 import TagihanCard from '@/components/Cards/TagihanCard'
+import Field from '@/components/Fields/FieldAdd'
+import Delivery from '@/components/Buttons/DeliveryBtn'
+import { required } from 'vuelidate/lib/validators'
 
 export default {
   components: {
@@ -272,13 +236,25 @@ export default {
     SwiperSlide,
     AlamatCard,
     TagihanCard,
+    Field,
+    Delivery,
   },
   data() {
     return {
+      dataAddress: null,
       logistik: false,
       instan: false,
       transfer: false,
+      jasa: false,
       cod: false,
+      text1: '',
+      form: {
+        receiver: '',
+        phone: '',
+        district: '',
+        portal_pos: '',
+        street: '',
+      },
       swiperOption: {
         slidesPerView: 1,
         slidesPerColumn: 1,
@@ -318,7 +294,57 @@ export default {
       slide: 0,
     }
   },
+  validations: {
+    form: {
+      receiver: {
+        required,
+      },
+      phone: {
+        required,
+      },
+      district: {
+        required,
+      },
+      portal_pos: {
+        required,
+      },
+      street: {
+        required,
+      },
+    },
+  },
+  created() {
+    this.fetchAddress()
+  },
   methods: {
+    async onSubmit() {
+      this.$v.$touch()
+      if (!this.$v.form.$invalid) {
+        this.isLoading = true
+        try {
+          const resp = await this.$axios.$post('/api/address/add', this.form)
+          console.log(resp)
+          this.isSuccess = true
+          setTimeout(() => {
+            this.$router.push('/detailpengiriman')
+            this.isLoading = false
+          }, 3000)
+        } catch (error) {
+          this.isLoading = false
+          this.isSuccess = false
+        }
+      } else {
+        this.$toast.error('Ada yang salah dalam pengisian form').goAway(3000)
+      }
+    },
+    async fetchAddress() {
+      try {
+        const resp = await this.$axios.$get(`/api/address/get`)
+        this.dataAddress = resp.data
+      } catch (error) {
+        console.log(error)
+      }
+    },
     onSlideStart(slide) {
       this.sliding = true
     },
@@ -338,7 +364,6 @@ export default {
 <style lang="stylus" scoped>
 @import '../styles/imports'
 
-.detail__pengiriman
 
 .detail__pengiriman__border
     background #FFFFFF
@@ -387,15 +412,11 @@ export default {
   padding-bottom 7px
 
 .label_modal
-  font-size 12px
+  font-size 11px
   font normal normal Proxima Nova
   letter-spacing 0.7px
   color #2D4957
 
-.input_modal
-  font-size 9px
-  font normal normal Proxima Nova
-  color #2D4957
 
 .btn_tambah_modal
   background #2D4957
