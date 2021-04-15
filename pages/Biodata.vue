@@ -284,20 +284,17 @@
                 </th>
                 <td>
                   <div>
-                    <div>Yudistryan Izhar</div>
-                    <div>085884070122</div>
+                    <div>property="item.name"</div>
+                    <div>item.phone</div>
                   </div>
                 </td>
                 <td>
-                  <div>
-                    <div>Rumah</div>
-                    <div>Jl. Karang kitri no.52 Kandangan, ds. Kandangan</div>
-                  </div>
+                  <div>item.street</div>
                 </td>
                 <td>
                   <div>
-                    <div>kec. Kandangan, kab. Kediri, Jawa Timur</div>
-                    <div>64294</div>
+                    <div>item.district</div>
+                    <div>item.postal_code</div>
                   </div>
                 </td>
                 <td>
@@ -312,7 +309,7 @@
                     <b-modal
                       class="modal_edit_alamat"
                       v-model="modalShow1"
-                      id="modal-1"
+                      id="modal-2"
                       title="BootstrapVue"
                       ref="my-modal"
                       hide-header
@@ -427,7 +424,7 @@
                       <b-modal
                         class="modal_hapus_alamat"
                         v-model="modalShow2"
-                        id="modal-1"
+                        id="modal-3"
                         title="BootstrapVue"
                         ref="my-modal"
                         hide-header
@@ -490,7 +487,7 @@
                     <b-modal
                       class="modal_edit_alamat"
                       v-model="modalShow1"
-                      id="modal-1"
+                      id="modal-2"
                       title="BootstrapVue"
                       ref="my-modal"
                       hide-header
@@ -605,7 +602,7 @@
                       <b-modal
                         class="modal_hapus_alamat"
                         v-model="modalShow2"
-                        id="modal-1"
+                        id="modal-3"
                         title="BootstrapVue"
                         ref="my-modal"
                         hide-header
@@ -1043,6 +1040,7 @@ export default {
   },
   data() {
     return {
+      dataSource: null,
       state: 1,
       isEdit: false,
       modalShow1: false,
@@ -1053,7 +1051,18 @@ export default {
       modalShow6: false,
     }
   },
+  created() {
+    this.fetchData()
+  },
   methods: {
+    async fetchData() {
+      try {
+        const resp = await this.$axios.$get(`/api/product`)
+        this.dataSource = resp.data
+      } catch (error) {
+        console.log(error)
+      }
+    },
     onSlideStart(slide) {
       this.sliding = true
     },
