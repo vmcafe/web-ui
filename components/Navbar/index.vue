@@ -43,10 +43,12 @@
                 </span>
               </div>
               <input
+                v-model="serach"
                 class="form-control my-0 py-1"
                 type="text"
                 placeholder="Ingin cari apa?"
                 aria-label="search"
+                @keyup="searchFood"
               />
             </div>
           </b-nav-form>
@@ -78,8 +80,21 @@ export default {
   data() {
     return {
       openSearch: false,
+      search: '',
+      listProduct: [],
     }
   },
+  methods: {
+    async searchFood() {
+      try {
+        const resp = await this.$axios.$get(`/api/product`)
+        this.dataArticle = resp.data
+      } catch (error) {
+        console.log(error)
+      }
+    },
+  },
+
   computed: {
     isLoggedIn() {
       return this.$cookies.get('__vmctHarimau')

@@ -76,9 +76,9 @@
       </div>
     </div>
     <b-modal
+      class="modal__login my-auto"
       ref="modal-status"
       size="sm"
-      class="login__modal"
       title="Status"
       hide-header
       hide-footer

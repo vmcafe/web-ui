@@ -66,14 +66,11 @@
                 />
                 <Field
                   class="col-12 col-md-6 mb-1 field_input_mail mx-auto"
-                  type="password"
-                  placeholder="KONFIRMASI PASSWORD"
-                  :value="$v.form.confirm_password.$model"
-                  :error="
-                    $v.form.confirm_password.$dirty &&
-                    $v.form.confirm_password.$error
-                  "
-                  @model="$v.form.confirm_password.$model = $event"
+                  type="text"
+                  placeholder="NOMOR HP"
+                  :value="$v.form.phone.$model"
+                  :error="$v.form.phone.$dirty && $v.form.phone.$error"
+                  @model="$v.form.phone.$model = $event"
                 />
                 <Gender
                   class="col-12 col-md-6 mb-1 field_input_mail mx-auto"
@@ -126,7 +123,8 @@ import Gender from '@/components/Fields/FieldGender'
 import Button from '@/components/Buttons/RightIconBtn'
 import SingleSignOn from '@/components/Buttons/SingleSignOnBtn'
 import TextLink from '@/components/TextLink'
-import { required, email } from 'vuelidate/lib/validators'
+import { required, email, helpers } from 'vuelidate/lib/validators'
+const alpha = helpers.regex('alpha', /^\+?([ -]?\d+)+|\(\d+\)([ -]\d+)/)
 export default {
   components: {
     Heading,
@@ -142,11 +140,11 @@ export default {
       isSuccess: true,
       isLoading: false,
       form: {
-        email: '',
         name: '',
-        password: '',
-        confirm_password: '',
+        email: '',
+        phone: '',
         gender: 'p',
+        password: '',
       },
     }
   },
@@ -162,8 +160,9 @@ export default {
       password: {
         required,
       },
-      confirm_password: {
+      phone: {
         required,
+        alpha,
       },
       gender: {
         required,

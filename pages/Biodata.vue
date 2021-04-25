@@ -1,5 +1,6 @@
 <template>
-  <div class="biodata">
+  <b-spinner v-if="isLoading" variant="primary" label="Spinning"></b-spinner>
+  <div v-else class="biodata">
     <Navbar />
     <b-container class="card__utama">
       <div class="d-flex justify-content-center">
@@ -62,7 +63,7 @@
                   ></b-img>
                 </div>
                 <b-row>
-                  <b-text class="nama_lengkap mx-auto">Yudistryan Izhar</b-text>
+                  <b-text class="nama_lengkap mx-auto">Yudistryan</b-text>
                 </b-row>
               </b-col>
             </div>
@@ -147,7 +148,10 @@
                 <h1 class="judul_tambah_alamat mt-2">Tambah Alamat Baru</h1>
               </div>
               <div class="form_modal pt-4 pb-2 px-2">
-                <b-form-group class="form_modal_content">
+                <b-form-group
+                  class="form_modal_content"
+                  @submit.stop.prevent="onSubmit"
+                >
                   <b-row>
                     <b-col cols="6">
                       <label
@@ -162,6 +166,11 @@
                         type="text"
                         class="input_modal"
                         required
+                        :value="$v.form.receiver.$model"
+                        :error="
+                          $v.form.receiver.$dirty && $v.form.receiver.$error
+                        "
+                        @model="$v.form.receiver.$model = $event"
                       ></b-form-input>
                     </b-col>
                     <b-col cols="6">
@@ -177,6 +186,9 @@
                         type="text"
                         class="input_modal"
                         required
+                        :value="$v.form.phone.$model"
+                        :error="$v.form.phone.$dirty && $v.form.phone.$error"
+                        @model="$v.form.phone.$model = $event"
                       ></b-form-input>
                     </b-col>
                   </b-row>
@@ -194,6 +206,11 @@
                         type="text"
                         class="input_modal"
                         required
+                        :value="$v.form.district.$model"
+                        :error="
+                          $v.form.district.$dirty && $v.form.district.$error
+                        "
+                        @model="$v.form.district.$model = $event"
                       ></b-form-input>
                     </b-col>
                     <b-col cols="4">
@@ -209,6 +226,12 @@
                         type="text"
                         class="input_modal"
                         required
+                        :value="$v.form.postal_code.$model"
+                        :error="
+                          $v.form.postal_code.$dirty &&
+                          $v.form.postal_code.$error
+                        "
+                        @model="$v.form.postal_code.$model = $event"
                       ></b-form-input>
                     </b-col>
                   </b-row>
@@ -226,13 +249,61 @@
                         type="text"
                         class="input_modal"
                         required
+                        :value="$v.form.street.$model"
+                        :error="$v.form.street.$dirty && $v.form.street.$error"
+                        @model="$v.form.street.$model = $event"
                       ></b-form-textarea>
                     </b-col>
                   </b-row>
                 </b-form-group>
+                <!-- <form class="mail__form" @submit.stop.prevent="onSubmit">
+                  <div class="container w-100">
+                    <div class="row">
+                      <Field
+                        class="col-12 col-md-6 mb-1 field_input_mail mx-auto"
+                        type="text"
+                        placeholder="RECEIVER"
+                        :value="$v.form.receiver.$model"
+                        :error="
+                          $v.form.receiver.$dirty && $v.form.receiver.$error
+                        "
+                        @model="$v.form.receiver.$model = $event"
+                      />
+                      <Field
+                        class="col-12 col-md-6 mb-1 field_input_mail mx-auto"
+                        type="text"
+                        placeholder="PHONE"
+                        :value="$v.form.phone.$model"
+                        :error="$v.form.phone.$dirty && $v.form.phone.$error"
+                        @model="$v.form.phone.$model = $event"
+                      />
+                      <Field
+                        class="col-12 col-md-6 mb-1 field_input_mail mx-auto"
+                        type="text"
+                        placeholder="DISTRICT"
+                        :value="$v.form.district.$model"
+                        :error="
+                          $v.form.district.$dirty && $v.form.district.$error
+                        "
+                        @model="$v.form.district.$model = $event"
+                      />
+                      <Field
+                        class="col-12 col-md-6 mb-1 field_input_mail mx-auto"
+                        type="text"
+                        placeholder="POSTAL CODE"
+                        :value="$v.form.postal_code.$model"
+                        :error="
+                          $v.form.postal_code.$dirty &&
+                          $v.form.postal_code.$error
+                        "
+                        @model="$v.form.postal_code.$model = $event"
+                      />
+                    </div>
+                  </div>
+                </form> -->
               </div>
               <div class="btn_modal text-center mb-3">
-                <b-button class="btn_tambah_modal" @click="hideModal"
+                <b-button class="btn_tambah_modal" type="submit"
                   >+ Tambah</b-button
                 >
                 <b-button class="btn_batal_modal" @click="hideModal"
@@ -274,209 +345,27 @@
               </tr>
             </thead>
             <tbody>
-              <tr>
-                <th scope="row">
-                  <input
-                    type="radio"
-                    name="product_variation"
-                    checked="checked"
-                  />
-                </th>
-                <td>
-                  <div>
-                    <div>property="item.name"</div>
-                    <div>item.phone</div>
-                  </div>
-                </td>
-                <td>
-                  <div>item.street</div>
-                </td>
-                <td>
-                  <div>
-                    <div>item.district</div>
-                    <div>item.postal_code</div>
-                  </div>
-                </td>
-                <td>
-                  <div class="action d-flex">
-                    <b-img
-                      class="action__edit"
-                      @click="modalShow1 = !modalShow1"
-                      src="~/assets/icons/ic_edit.svg"
-                      alt=""
-                    >
-                    </b-img>
-                    <b-modal
-                      class="modal_edit_alamat"
-                      v-model="modalShow1"
-                      id="modal-2"
-                      title="BootstrapVue"
-                      ref="my-modal"
-                      hide-header
-                      hide-footer
-                      size="md"
-                    >
-                      <div class="d-block text-center">
-                        <h1 class="judul_tambah_alamat mt-2">Edit Alamat?</h1>
-                      </div>
-                      <div class="form_modal pt-4 pb-2 px-2">
-                        <b-form-group class="form_modal_content">
-                          <b-row>
-                            <b-col cols="6">
-                              <label
-                                for="nama_penerima"
-                                invalid-feedback="Nama alamat is required"
-                                class="label_modal mb-1 pt-2"
-                                >Nama penerima</label
-                              >
-                              <b-form-input
-                                id="nama_penerima"
-                                placeholder="Yudistryan Izhar"
-                                type="text"
-                                class="input_modal"
-                                required
-                              ></b-form-input>
-                            </b-col>
-                            <b-col cols="6">
-                              <label
-                                for="no_hp"
-                                invalid-feedback="Nama alamat is required"
-                                class="label_modal mb-1 pt-2"
-                                >No HP</label
-                              >
-                              <b-form-input
-                                id="no_hp"
-                                placeholder="+628131151080"
-                                type="text"
-                                class="input_modal"
-                                required
-                              ></b-form-input>
-                            </b-col>
-                          </b-row>
-                          <b-row>
-                            <b-col cols="8">
-                              <label
-                                for="kec_kota"
-                                invalid-feedback="Nama alamat is required"
-                                class="label_modal mb-1 pt-2"
-                                >Kecamatan / Kota</label
-                              >
-                              <b-form-input
-                                id="kec_kota"
-                                placeholder="Kandangan, Kab. Kediri, Jawa Timur"
-                                type="text"
-                                class="input_modal"
-                                required
-                              ></b-form-input>
-                            </b-col>
-                            <b-col cols="4">
-                              <label
-                                for="kode_pos"
-                                invalid-feedback="Nama alamat is required"
-                                class="label_modal mb-1 pt-2"
-                                >Kode Pos</label
-                              >
-                              <b-form-input
-                                id="kode_pos"
-                                placeholder="642942"
-                                type="text"
-                                class="input_modal"
-                                required
-                              ></b-form-input>
-                            </b-col>
-                          </b-row>
-                          <b-row>
-                            <b-col>
-                              <label
-                                for="alamat"
-                                invalid-feedback="Nama alamat is required"
-                                class="label_modal mb-1 pt-2"
-                                >Alamat</label
-                              >
-                              <b-form-textarea
-                                id="alamat"
-                                placeholder="Jl. Karang kitri no. 52, Kandangan"
-                                type="text"
-                                class="input_modal"
-                                required
-                              ></b-form-textarea>
-                            </b-col>
-                          </b-row>
-                        </b-form-group>
-                      </div>
-                      <div class="btn_modal text-center mb-3">
-                        <b-button class="btn_edit_modal" @click="hideModal"
-                          >Simpan</b-button
-                        >
-                        <b-button class="btn_batal_modal" @click="hideModal"
-                          >Batal</b-button
-                        >
-                      </div>
-                    </b-modal>
-                    <div>
-                      <b-img
-                        class="action__hapus ml-3"
-                        @click="modalShow2 = !modalShow2"
-                        src="~/assets/icons/ic_trashcan.svg"
-                        alt=""
-                      >
-                      </b-img>
-                      <b-modal
-                        class="modal_hapus_alamat"
-                        v-model="modalShow2"
-                        id="modal-3"
-                        title="BootstrapVue"
-                        ref="my-modal"
-                        hide-header
-                        hide-footer
-                        size="md"
-                      >
-                        <div class="d-block text-center">
-                          <h1 class="judul_tambah_alamat mt-2">
-                            Anda yakin menghapus alamat ini?
-                          </h1>
-                        </div>
-                        <div class="form_modal pt-4 pb-2 px-2">
-                          <b-form-group class="form_modal_content">
-                          </b-form-group>
-                        </div>
-                        <div class="btn_modal text-center mb-3">
-                          <b-button class="btn_edit_modal" @click="hideModal"
-                            >Hapus</b-button
-                          >
-                          <b-button class="btn_batal_red" @click="hideModal"
-                            >Batal</b-button
-                          >
-                        </div>
-                      </b-modal>
-                    </div>
-                  </div>
-                </td>
-              </tr>
-              <tr>
+              <tr v-for="item in dataAddress" :key="item.id">
                 <th scope="row">
                   <input type="radio" name="product_variation" />
                 </th>
                 <td>
                   <div>
-                    <div>Yudistryan Izhar</div>
-                    <div>085884070122</div>
+                    <div>{{ item.receiver }}</div>
+                    <div>{{ item.phone }}</div>
                   </div>
+                </td>
+                <td>
+                  <div>{{ item.street }}</div>
                 </td>
                 <td>
                   <div>
-                    <div>Rumah</div>
-                    <div>Jl. Karang kitri no.52 Kandangan, ds. Kandangan</div>
+                    <div>{{ item.district }}</div>
+                    <div>{{ item.postal_code }}</div>
                   </div>
                 </td>
                 <td>
-                  <div>
-                    <div>kec. Kandangan, kab. Kediri, Jawa Timur</div>
-                    <div>64294</div>
-                  </div>
-                </td>
-                <td>
-                  <div class="action d-flex justify-content-center">
+                  <div class="action d-flex">
                     <b-img
                       class="action__edit"
                       @click="modalShow1 = !modalShow1"
@@ -1033,6 +922,7 @@
 <script>
 import Navbar from '@/components/Navbar'
 import ProductCard from '@/components/Cards/ProductCard'
+import { required } from 'vuelidate/lib/validators'
 export default {
   components: {
     Navbar,
@@ -1049,10 +939,45 @@ export default {
       modalShow4: false,
       modalShow5: false,
       modalShow6: false,
+      isLoading: false,
+      dataAddress: null,
+      headers: {
+        'Content-Type': 'application/json',
+        Authorization: `Bearer ${
+          this.$cookies.get('__vmctHarimau').access_token
+        }`,
+      },
+      form: {
+        receiver: '',
+        phone: '',
+        district: '',
+        postal_code: '',
+        street: '',
+      },
     }
+  },
+  validations: {
+    form: {
+      receiver: {
+        required,
+      },
+      phone: {
+        required,
+      },
+      district: {
+        required,
+      },
+      postal_code: {
+        required,
+      },
+      street: {
+        required,
+      },
+    },
   },
   created() {
     this.fetchData()
+    this.listAddress()
   },
   methods: {
     async fetchData() {
@@ -1072,6 +997,38 @@ export default {
     hideModal() {
       this.$refs['my-modal'].hide()
     },
+    async onSubmit() {
+      this.$v.$touch()
+      if (!this.$v.form.$invalid) {
+        this.isLoading = true
+        try {
+          const resp = await this.$axios.$post('/api/address/add', this.form)
+          setTimeout(() => {
+            this.isLoading = false
+            this.dataAddress = resp.data
+            this.$router.push('/biodata')
+          }, 2000)
+        } catch (error) {
+          console.log(error)
+          this.isLoading = false
+        }
+      } else {
+        this.$toast.error('Ada yang salah dalam pengisian form').goAway(3000)
+      }
+    },
+    async listAddress() {
+      this.isLoading = true
+      try {
+        const resp = await this.$axios.$get(`/api/address/get`, {
+          headers: this.headers,
+        })
+        this.dataAddress = resp.data
+        this.isLoading = false
+      } catch (error) {
+        this.$toast.error('Gagal mendapatkan data user').goAway(3000) // if user need to know
+        this.isLoading = false
+      }
+    },
   },
 }
 </script>
@@ -1079,256 +1036,297 @@ export default {
 <style lang="stylus" scoped>
 @import '../styles/imports';
 
-.card__utama
-  padding-bottom 70px
-  background #FFFFFF
-  box-shadow 0px 0px 15px #00000024
-  opacity 1
+.card__utama {
+  padding-bottom: 70px;
+  background: #FFFFFF;
+  box-shadow: 0px 0px 15px #00000024;
+  opacity: 1;
+}
 
-.card__biodata
-  margin-left 50px
-  margin-right 50px
-  margin-top 50px
-  margin-bottom 50px
-  border-radius 20px
-  background #FBEFE1
+.card__biodata {
+  margin-left: 50px;
+  margin-right: 50px;
+  margin-top: 50px;
+  margin-bottom: 50px;
+  border-radius: 20px;
+  background: #FBEFE1;
+}
 
-.navbar__profile
-  margin-top 70px
+.navbar__profile {
+  margin-top: 70px;
+}
 
-.button__ubah
-  margin-top -20px
-  margin-left auto
-  margin-right -5px
-  width 133px
-  height 52px
-  border-radius 20px
-  letter-spacing 3.25px
-  color #FFFFFF
-  background #2D4957
-  font-size 13px
-  opacity 1
+.button__ubah {
+  margin-top: -20px;
+  margin-left: auto;
+  margin-right: -5px;
+  width: 133px;
+  height: 52px;
+  border-radius: 20px;
+  letter-spacing: 3.25px;
+  color: #FFFFFF;
+  background: #2D4957;
+  font-size: 13px;
+  opacity: 1;
 
-  &__clicked
-    background #FCFCFC
-    color #2D4957
+  &__clicked {
+    background: #FCFCFC;
+    color: #2D4957;
+  }
+}
 
-.avatar
-  padding-left 50px
-  padding-right 50px
+.avatar {
+  padding-left: 50px;
+  padding-right: 50px;
+}
 
-.profile__avatar
-  margin-left 50px
-  margin-right 50px
-  margin-top 50px
+.profile__avatar {
+  margin-left: 50px;
+  margin-right: 50px;
+  margin-top: 50px;
+}
 
+.relative__profile {
+  position: relative;
+}
 
-.relative__profile
-  position relative
+.profile__ubah {
+  position: absolute;
+  margin-top: -185px;
+  margin-left: 150px;
+  display: none;
 
-.profile__ubah
-  position absolute
-  margin-top -185px
-  margin-left 150px
-  display none
+  &__show {
+    display: block;
+  }
+}
 
-  &__show
-    display block
+.nama_lengkap {
+  margin-left: 50px;
+  margin-right: 50px;
+  margin-top: 15px;
+  font-size: 20px;
+  font-style: italic;
+  letter-spacing: 0.55px;
+  font: Proxima Nova;
+  color: #2D4957;
+  opacity: 1;
+}
 
-.nama_lengkap
-  margin-left 50px
-  margin-right 50px
-  margin-top 15px
-  font-size 20px
-  font-style italic
-  letter-spacing 0.55px
-  font Proxima Nova
-  color #2D4957
-  opacity 1
+.form_group1 {
+  margin-left: 40px;
+  margin-top: 50px;
+  margin-bottom: 50px;
+  letter-spacing: 2.25px;
+  font-size: 15px;
+  color: #000000;
+  font-style: futura-pt;
+}
 
-.form_group1
-  margin-left 40px
-  margin-top 50px
-  margin-bottom 50px
-  letter-spacing 2.25px
-  font-size 15px
-  color #000000
-  font-style futura-pt
+.form_group2 {
+  margin-top: 50px;
+  margin-bottom: 40px;
+  letter-spacing: 2.25px;
+  font-size: 15px;
+  color: #000000;
+  font-style: futura-pt;
+}
 
-.form_group2
-  margin-top 50px
-  margin-bottom 40px
-  letter-spacing 2.25px
-  font-size 15px
-  color #000000
-  font-style futura-pt
+.input {
+  margin-bottom: 15px;
+  font-color: #2d4957;
+  background-color: #FCFCFC;
+  box-shadow: 0px 0px 6px #00000029;
+  border-radius: 5px;
+  height: 40px;
+  width: 250px;
+  background: #0000000D;
 
-.input
-  margin-bottom 15px
-  font-color #2d4957
-  background-color #FCFCFC
-  box-shadow 0px 0px 6px #00000029
-  border-radius 5px
-  height 40px
-  width 250px
-  background #0000000D
+  &_show {
+    background: #FCFCFC;
+  }
+}
 
-  &_show
-    background #FCFCFC
+.keterangan {
+  margin-bottom: 10px;
+}
 
-.keterangan
-  margin-bottom 10px
+.table__tambah__alamat {
+  margin-top: 20px;
+  font-size: 15px;
+  font: normal Proxima Nova;
+  letter-spacing: 0.3px;
+  color: #000000;
+}
 
-.table__tambah__alamat
-  margin-top 20px
-  font-size 15px
-  font normal Proxima Nova
-  letter-spacing 0.3px
-  color #000000
+.daftar_alamat {
+  border-bottom: 1px solid #707070;
+}
 
-.daftar_alamat
-  border-bottom 1px solid #707070
+.button__tambah__alamat {
+  background-color: #2D4957;
+  width: 180px;
+  margin-left: 40px;
+  margin-top: 50px;
+}
 
-.button__tambah__alamat
-  background-color #2D4957
-  width 180px
-  margin-left:40px
-  margin-top 50px
+.modal_tambah_alamat {
+  border-radius: 10px;
+}
 
-.modal_tambah_alamat
-  border-radius 10px
+.judul_tambah_alamat {
+  font-size: 18px;
+  font-weight: bold;
+  font: normal normal Proxima Nova;
+  letter-spacing: 3px;
+  color: #2D4957;
+  border-bottom: 1px solid #2D4957;
+  padding-bottom: 7px;
+}
 
-.judul_tambah_alamat
-  font-size 18px
-  font-weight bold
-  font normal normal Proxima Nova
-  letter-spacing 3px
-  color #2D4957
-  border-bottom 1px solid #2D4957
-  padding-bottom 7px
+.label_modal {
+  font-size: 15px;
+  font: normal normal Proxima Nova;
+  letter-spacing: 0.7px;
+  color: #2D4957;
+}
 
-.label_modal
-  font-size 15px
-  font: normal normal Proxima Nova
-  letter-spacing 0.7px
-  color #2D4957
+.input_modal {
+  font-size: 15px;
+  font: normal normal Proxima Nova;
+  color: #2D4957;
+}
 
-.input_modal
-  font-size 15px
-  font normal normal Proxima Nova
-  color #2D4957
+.btn_tambah_modal {
+  background: #2D4957;
+  opacity: 1;
+  font-size: 15px;
+  font: normal normal Proxima Nova;
+  letter-spacing: 1.8px;
+  color: #FFFFFF;
+  border-radius: 5px;
+}
 
-.btn_tambah_modal
-  background #2D4957
-  opacity 1
-  font-size 15px
-  font normal normal Proxima Nova
-  letter-spacing 1.8px
-  color #FFFFFF
-  border-radius 5px
+.btn_batal_modal {
+  margin-left: 5px;
+  background: #F6F6F6;
+  font-size: 15px;
+  font: normal normal Proxima Nova;
+  letter-spacing: 1.8px;
+  color: #2D4957;
+  border-radius: 5px;
+}
 
-.btn_batal_modal
-  margin-left 5px
-  background #F6F6F6
-  font-size 15px
-  font normal normal Proxima Nova
-  letter-spacing 1.8px
-  color #2D4957
-  border-radius 5px
+.btn_edit_modal {
+  background: #2D4957;
+  opacity: 1;
+  font-size: 15px;
+  font: normal normal Proxima Nova;
+  letter-spacing: 1.8px;
+  color: #FFFFFF;
+  border-radius: 5px;
+}
 
-.btn_edit_modal
-  background #2D4957
-  opacity 1
-  font-size 15px
-  font normal normal Proxima Nova
-  letter-spacing 1.8px
-  color #FFFFFF
-  border-radius 5px
+.btn_batal_red {
+  margin-left: 5px;
+  background: #B14141;
+  font-size: 15px;
+  font: normal normal Proxima Nova;
+  letter-spacing: 1.8px;
+  color: #F6F6F6;
+  width: 100px;
+  border-radius: 5px;
+}
 
-.btn_batal_red
-  margin-left 5px
-  background #B14141
-  font-size 15px
-  font normal normal Proxima Nova
-  letter-spacing 1.8px
-  color #F6F6F6
-  width 100px
-  border-radius 5px
+.btn_batal_pesanan {
+  margin-top: 10px;
+  background: #F6F6F6;
+  font-size: 15px;
+  font: normal normal Proxima Nova;
+  letter-spacing: 1.8px;
+  color: #2D4957;
+  border-radius: 5px;
+  width: 200px;
+}
 
-.btn_batal_pesanan
-  margin-top 10px
-  background #F6F6F6
-  font-size 15px
-  font normal normal Proxima Nova
-  letter-spacing 1.8px
-  color #2D4957
-  border-radius 5px
-  width 200px
+.btn_bayar_sekarang {
+  background: #2D4957;
+  opacity: 1;
+  font-size: 15px;
+  font: normal normal Proxima Nova;
+  letter-spacing: 1.8px;
+  color: #FFFFFF;
+  border-radius: 5px;
+  width: 200px;
+}
 
-.btn_bayar_sekarang
-  background #2D4957
-  opacity 1
-  font-size 15px
-  font normal normal Proxima Nova
-  letter-spacing 1.8px
-  color #FFFFFF
-  border-radius 5px
-  width 200px
+.cari_alamat {
+  margin-right: 40px;
+  margin-top: 50px;
+}
 
-.cari_alamat
-  margin-right 40px
-  margin-top 50px
+.search_icon {
+  height: 15px;
+  width: 15px;
+}
 
-.search_icon
-  height 15px
-  width 15px
+.tabel__tambah__alamat {
+  margin-top: 40px;
+  letter-spacing: 2.25px;
+  color: #2D4957;
+  opacity: 1;
+}
 
-.tabel__tambah__alamat
-  margin-top 40px
-  letter-spacing 2.25px
-  color #2D4957
-  opacity 1
+.action {
+  position: absolute;
+  display: flex;
+  margin-right: 30px;
+}
 
-.action
-  position absolute
-  display flex
-  margin-right 30px
+.action__edit {
+  margin-left: -40px;
+  width: 18px;
+  height: 18px;
+}
 
-.action__edit
-  margin-left -40px
-  width 18px
-  height 18px
+.action__hapus {
+  width: 18px;
+  height: 18px;
+}
 
-.action__hapus
-  width 18px
-  height 18px
+.favorite {
+  margin-top: 40px;
+}
 
-.favorite
-  margin-top 40px
+.table__pesanan {
+  margin-top: 40px;
 
-.table__pesanan
-  margin-top 40px
+  &__status {
+    color: #4AB4A2;
+  }
+}
 
-  &__status
-    color #4AB4A2
+.img__payment {
+  margin-top: 40px;
+  margin-bottom: 40px;
+}
 
-.img__payment
-  margin-top 40px
-  margin-bottom 40px
+.detail__payment__kiri {
+  font-color: #2D4957;
+  letter-spacing: 1.5px;
+  font: normal normal medium 15px / 17px Proxima Nova;
+}
 
-.detail__payment__kiri
-  font-color #2D4957
-  letter-spacing 1.5px
-  font: normal normal medium 15px/17px Proxima Nova;
+.detail__payment__kanan {
+  font-color: #635F5F;
+  font-size: 15px;
+  letter-spacing: 1.5px;
+}
 
-.detail__payment__kanan
-  font-color #635F5F
-  font-size 15px
-  letter-spacing 1.5px
-
-.status__payment
-  margin-bottom 20px
-  color #4AB4A2
-  font normal normal bold 20px/17px Proxima Nova
-  letter-spacing 2px
+.status__payment {
+  margin-bottom: 20px;
+  color: #4AB4A2;
+  font: normal normal bold 20px / 17px Proxima Nova;
+  letter-spacing: 2px;
+}
 </style>

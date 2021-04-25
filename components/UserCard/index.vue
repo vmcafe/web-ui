@@ -10,8 +10,15 @@
   >
     <template #button-content>
       <div class="usercard usercard__bordered d-flex align-items-center">
-        <Avatar username="Yohni" :size="24" alt="" class="usercard__img mr-2" />
-        <div class="usercard__text">Yohni</div>
+        <Avatar
+          :username="(userData && userData.name) || 'defaultNama'"
+          :size="24"
+          alt=""
+          class="usercard__img mr-2"
+        />
+        <div class="usercard__text">
+          {{ (userData && userData.name) || 'defaultNama' }}
+        </div>
       </div>
     </template>
     <b-dropdown-item class="usercard__extended">
@@ -49,13 +56,16 @@ export default {
       },
     }
   },
-  created() {
-    // this.fetchUser()
+  mounted() {
+    this.fetchUser()
   },
   methods: {
     async fetchUser() {
+      // console.log(this.headers)
       try {
-        const resp = await this.$axios.$get('/api/auth/me')
+        const resp = await this.$axios.$get('/api/user/me', {
+          headers: this.headers,
+        })
         this.userData = resp.data
       } catch (error) {
         this.$toast.error('Gagal mendapatkan data user')
@@ -76,22 +86,27 @@ export default {
 <style lang="stylus" scoped>
 @import '../../styles/imports';
 
-.usercard
-  display flex
-  max-height 35px
-  background none
+.usercard {
+  display: flex;
+  max-height: 35px;
+  background: none;
 
-  &__img
-    padding 0
+  &__img {
+    padding: 0;
+  }
 
-  &__text
-    font-size 14px
-    line-height 19px
-    color blackBlur
+  &__text {
+    font-size: 14px;
+    line-height: 19px;
+    color: blackBlur;
+  }
+}
 
-.dropdownku
-  border-left 2px solid blackBlur
+.dropdownku {
+  border-left: 2px solid blackBlur;
 
-  .btn-secondary
-    background none
+  .btn-secondary {
+    background: none;
+  }
+}
 </style>
