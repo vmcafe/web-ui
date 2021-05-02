@@ -105,6 +105,8 @@ export default {
 
 <style lang="stylus" scoped>
 @import '../../styles/imports';
-.navbar
-  background skinPrimary !important
+
+.navbar {
+  background: skinPrimary !important;
+}
 </style>

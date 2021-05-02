@@ -25,7 +25,7 @@
           class="detail__title text-center h1 font-weight-medium mb-4"
           :data="dataSource"
         >
-          {{ name }}
+          {{ dataSource && dataSource[0] && dataSource[0].name }}
         </h1>
         <Variant class="mb-5" :items="variants" :selected="selectedVariant" />
         <b-row>
@@ -167,7 +167,9 @@ export default {
   methods: {
     async fetchData() {
       try {
-        const resp = await this.$axios.$get(`/api/product/`)
+        const resp = await this.$axios.$get(
+          `/api/product/s/${this.$route.params.slug}`
+        )
         this.dataSource = resp.data
       } catch (error) {
         console.log(error)
@@ -178,95 +180,114 @@ export default {
 </script>
 
 <style lang="stylus" scoped>
-.detail
-  &__img
-    max-width 300px
+.detail {
+  &__img {
+    max-width: 300px;
+  }
 
-  &__imgs
-    max-width 300px
-    &__item
-      width 80px
-      height 60px
-      object-fit cover
-      cursor pointer
-      opacity 0.5
-      transition all 0.25s
+  &__imgs {
+    max-width: 300px;
 
-      &:hover
-        opacity 1
+    &__item {
+      width: 80px;
+      height: 60px;
+      object-fit: cover;
+      cursor: pointer;
+      opacity: 0.5;
+      transition: all 0.25s;
 
-  &__title
-    letter-spacing -0.37px
-    font-weight 500
+      &:hover {
+        opacity: 1;
+      }
+    }
+  }
 
-  &__description
-    font-size 18px
-    line-height 40px
-    letter-spacing 4px
-    text-transform uppercase
-    color #2D4957
+  &__title {
+    letter-spacing: -0.37px;
+    font-weight: 500;
+  }
 
-  &__price
-    font-size 35px
-    line-height 52px
-    letter-spacing 7px
-    color #2D4957
+  &__description {
+    font-size: 18px;
+    line-height: 40px;
+    letter-spacing: 4px;
+    text-transform: uppercase;
+    color: #2D4957;
+  }
 
-  &__button
-    height 60px
-    background #2D4957
-    border-radius 10px
-    letter-spacing 3.5px
-    color #FFFFFF
-    font-size 14px
+  &__price {
+    font-size: 35px;
+    line-height: 52px;
+    letter-spacing: 7px;
+    color: #2D4957;
+  }
 
-    &__outline
-      height 60px
-      min-width 60px
-      background #FFF
-      border 1px solid #2D4957
-      border-radius 10px
-      display flex
-      align-items center
-      justify-content center
+  &__button {
+    height: 60px;
+    background: #2D4957;
+    border-radius: 10px;
+    letter-spacing: 3.5px;
+    color: #FFFFFF;
+    font-size: 14px;
 
-  &__s2
-    &__label
-      letter-spacing 7.5px
-      color #000000
-      opacity 0.75
-      font-size 30px
+    &__outline {
+      height: 60px;
+      min-width: 60px;
+      background: #FFF;
+      border: 1px solid #2D4957;
+      border-radius: 10px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+  }
 
-    &__desc
-      font-size 19px
-      line-height 40px
-      letter-spacing 4.75px
-      color #000000
-      border 1px solid #000
+  &__s2 {
+    &__label {
+      letter-spacing: 7.5px;
+      color: #000000;
+      opacity: 0.75;
+      font-size: 30px;
+    }
 
-  &__slide
-    &__label
-      font-weight 500
-      letter-spacing 4.5px
-      text-transform uppercase
-      font-size 18px
+    &__desc {
+      font-size: 19px;
+      line-height: 40px;
+      letter-spacing: 4.75px;
+      color: #000000;
+      border: 1px solid #000;
+    }
+  }
 
-.nettoOrStock
-  background #FCF5ED
-  border-radius 20px 0 0 20px
-  text-align center
+  &__slide {
+    &__label {
+      font-weight: 500;
+      letter-spacing: 4.5px;
+      text-transform: uppercase;
+      font-size: 18px;
+    }
+  }
+}
 
-  &__label
-    font-size 16px
-    font-weight 500
-    letter-spacing 4px
-    color #2D4957
-    border-bottom 1px solid #2D4957
-    text-transform uppercase
+.nettoOrStock {
+  background: #FCF5ED;
+  border-radius: 20px 0 0 20px;
+  text-align: center;
 
-  &__value
-    font-size 19px
-    font-weight 500
-    letter-spacing 4.75px
-    color #2D4957
+  &__label {
+    font-size: 16px;
+    font-weight: 500;
+    letter-spacing: 4px;
+    color: #2D4957;
+    border-bottom: 1px solid #2D4957;
+    text-transform: uppercase;
+  }
+
+  &__value {
+    font-size: 19px;
+    font-weight: 500;
+    letter-spacing: 4.75px;
+    color: #2D4957;
+  }
+}
 </style>

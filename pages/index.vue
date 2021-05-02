@@ -37,6 +37,7 @@
           <swiper class="swiper" :options="swiperOption">
             <swiper-slide v-for="item in dataSource" :key="item">
               <ProductCard
+                :id="item.id"
                 :name="item.name"
                 :price="item.price"
                 @click="count += 1"
@@ -204,35 +205,49 @@ export default {
 </script>
 
 <style lang="stylus" scoped>
-@import '../styles/imports'
-.product-list
-  .swiper
+@import '../styles/imports';
+
+.product-list {
+  .swiper {
     height: 644px;
     margin-left: 124px;
     margin-right: 124px;
-    @media (max-width: 1023px)
+
+    @media (max-width: 1023px) {
       margin-left: auto;
       margin-right: auto;
       height: 300px;
-    .swiper-slide
+    }
+
+    .swiper-slide {
       height: 288px;
-.article
-  background url('~/assets/bg.svg') no-repeat
-  background-size contain
-  @media (max-width 1024px)
-      background skinPrimary
+    }
+  }
+}
 
-  &__heading
-    color #fff
-    font-weight 700
-    background url('~/assets/bg2.svg') no-repeat
+.article {
+  background: url('~/assets/bg.svg') no-repeat;
+  background-size: contain;
 
-    @media (max-width 1024px)
-      background #2D4957
-      max-width 200px
-      border-radius 0 30px 30px 0
+  @media (max-width: 1024px) {
+    background: skinPrimary;
+  }
 
-  &__content
-    padding-top 60px
-    padding-bottom 100px
+  &__heading {
+    color: #fff;
+    font-weight: 700;
+    background: url('~/assets/bg2.svg') no-repeat;
+
+    @media (max-width: 1024px) {
+      background: #2D4957;
+      max-width: 200px;
+      border-radius: 0 30px 30px 0;
+    }
+  }
+
+  &__content {
+    padding-top: 60px;
+    padding-bottom: 100px;
+  }
+}
 </style>

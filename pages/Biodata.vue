@@ -148,7 +148,7 @@
                 <h1 class="judul_tambah_alamat mt-2">Tambah Alamat Baru</h1>
               </div>
               <div class="form_modal pt-4 pb-2 px-2">
-                <b-form-group
+                <b-form
                   class="form_modal_content"
                   @submit.stop.prevent="onSubmit"
                 >
@@ -166,11 +166,10 @@
                         type="text"
                         class="input_modal"
                         required
-                        :value="$v.form.receiver.$model"
                         :error="
                           $v.form.receiver.$dirty && $v.form.receiver.$error
                         "
-                        @model="$v.form.receiver.$model = $event"
+                        v-model="$v.form.receiver.$model"
                       ></b-form-input>
                     </b-col>
                     <b-col cols="6">
@@ -186,9 +185,8 @@
                         type="text"
                         class="input_modal"
                         required
-                        :value="$v.form.phone.$model"
                         :error="$v.form.phone.$dirty && $v.form.phone.$error"
-                        @model="$v.form.phone.$model = $event"
+                        v-model="$v.form.phone.$model"
                       ></b-form-input>
                     </b-col>
                   </b-row>
@@ -206,11 +204,10 @@
                         type="text"
                         class="input_modal"
                         required
-                        :value="$v.form.district.$model"
                         :error="
                           $v.form.district.$dirty && $v.form.district.$error
                         "
-                        @model="$v.form.district.$model = $event"
+                        v-model="$v.form.district.$model"
                       ></b-form-input>
                     </b-col>
                     <b-col cols="4">
@@ -249,13 +246,20 @@
                         type="text"
                         class="input_modal"
                         required
-                        :value="$v.form.street.$model"
                         :error="$v.form.street.$dirty && $v.form.street.$error"
-                        @model="$v.form.street.$model = $event"
+                        v-model="$v.form.street.$model"
                       ></b-form-textarea>
                     </b-col>
                   </b-row>
-                </b-form-group>
+                  <div class="btn_modal text-center mb-3">
+                    <b-button class="btn_tambah_modal" type="submit"
+                      >+ Tambah</b-button
+                    >
+                    <b-button class="btn_batal_modal" @click="hideModal"
+                      >Batal</b-button
+                    >
+                  </div>
+                </b-form>
                 <!-- <form class="mail__form" @submit.stop.prevent="onSubmit">
                   <div class="container w-100">
                     <div class="row">
@@ -301,14 +305,6 @@
                     </div>
                   </div>
                 </form> -->
-              </div>
-              <div class="btn_modal text-center mb-3">
-                <b-button class="btn_tambah_modal" type="submit"
-                  >+ Tambah</b-button
-                >
-                <b-button class="btn_batal_modal" @click="hideModal"
-                  >Batal</b-button
-                >
               </div>
             </b-modal>
           </div>
