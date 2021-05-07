@@ -1,1 +1,0 @@
-__NUXT_JSONP__("/Underconstruct", {data:[{}],fetch:{},mutations:void 0});
