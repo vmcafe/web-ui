@@ -1,5 +1,6 @@
 <template>
-  <div class="detail__pengiriman">
+  <b-spinner v-if="isLoading" variant="primary" label="Spinning"></b-spinner>
+  <div v-else class="detail__pengiriman">
     <Navbar />
     <b-container class="detail__pengiriman__border">
       <b-row>
@@ -18,7 +19,7 @@
                 <swiper class="swiper" :options="swiperOption">
                   <swiper-slide
                     v-for="item in dataAddress"
-                    :key="item"
+                    :key="item.id"
                     class="swiper_slide px-auto"
                   >
                     <AlamatCard :street="item.street" />
@@ -114,11 +115,11 @@
                       class="col-12 mb-2 ml-auto field_input"
                       type="text"
                       placeholder="642942"
-                      :value="$v.form.portal_pos.$model"
+                      :value="$v.form.postal_code.$model"
                       :error="
-                        $v.form.portal_pos.$dirty && $v.form.portal_pos.$error
+                        $v.form.postal_code.$dirty && $v.form.postal_code.$error
                       "
-                      @model="$v.form.portal_pos.$model = $event"
+                      @model="$v.form.postal_code.$model = $event"
                     />
                   </div>
                   <div class="col-12">
@@ -241,7 +242,14 @@ export default {
   },
   data() {
     return {
+      isLoading: false,
       dataAddress: null,
+      headers: {
+        'Content-Type': 'application/json',
+        Authorization: `Bearer ${
+          this.$cookies.get('__vmctHarimau').access_token
+        }`,
+      },
       logistik: false,
       instan: false,
       transfer: false,
@@ -252,7 +260,7 @@ export default {
         receiver: '',
         phone: '',
         district: '',
-        portal_pos: '',
+        postal_code: '',
         street: '',
       },
       swiperOption: {
@@ -305,7 +313,7 @@ export default {
       district: {
         required,
       },
-      portal_pos: {
+      postal_code: {
         required,
       },
       street: {
@@ -322,27 +330,32 @@ export default {
       if (!this.$v.form.$invalid) {
         this.isLoading = true
         try {
-          const resp = await this.$axios.$post('/api/address/add', this.form)
-          console.log(resp)
-          this.isSuccess = true
+          const resp = await this.$axios.$post('/api/address/add', this.form, {
+            headers: this.headers,
+          })
+          this.dataAddress = resp.data
           setTimeout(() => {
-            this.$router.push('/detailpengiriman')
-            this.isLoading = false
+            location.reload()
           }, 3000)
         } catch (error) {
           this.isLoading = false
-          this.isSuccess = false
+          console.log(error)
         }
       } else {
         this.$toast.error('Ada yang salah dalam pengisian form').goAway(3000)
       }
     },
     async fetchAddress() {
+      this.isLoading = true
       try {
-        const resp = await this.$axios.$get(`/api/address/get`)
+        const resp = await this.$axios.$get(`/api/address/get`, {
+          headers: this.headers,
+        })
         this.dataAddress = resp.data
+        this.isLoading = false
       } catch (error) {
-        console.log(error)
+        this.$toast.error('Gagal mendapatkan data user').goAway(3000) // if user need to know
+        this.isLoading = false
       }
     },
     onSlideStart(slide) {

@@ -81,11 +81,10 @@
               squared
               variant="outline-secondary"
               class="metode__pembayaran__pilihan mt-1"
-              @click="state = 1"
             >
               Transfer</b-button
             >
-            <div v-if="state == 1">
+            <!-- <div v-if="state == 1">
               <b-button
                 block
                 squared
@@ -105,7 +104,7 @@
               >
                 {{ item }}</b-button
               >
-            </div>
+            </div> -->
           </div>
           <div>
             <b-button
@@ -114,15 +113,14 @@
               squared
               variant="outline-secondary"
               class="metode__pembayaran__pilihan mt-1"
-              @click="state = 2"
             >
               COD</b-button
             >
-            <div v-if="state == 2" class="text-center">
+            <!-- <div v-if="state == 2" class="text-center">
               <b-button squared variant="outline-secondary" class="pilih_bank">
                 COD</b-button
               >
-            </div>
+            </div> -->
           </div>
         </b-button-group>
       </div>

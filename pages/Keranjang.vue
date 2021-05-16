@@ -116,7 +116,7 @@
                 </b-row>
                 <b-row>
                   <b-button class="button_bayar_content mt-2" href="/" block>
-                    Bayar
+                    Beli
                   </b-button>
                 </b-row>
               </div>
