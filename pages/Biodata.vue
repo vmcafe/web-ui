@@ -136,13 +136,12 @@
               size="md"
             >
               <div class="icon_close text-right">
-                <a href="/" target="">
-                  <b-img
-                    src="~/assets/Exit_icon.svg"
-                    alt=""
-                    width="25px"
-                  ></b-img>
-                </a>
+                <b-img
+                  src="~/assets/Exit_icon.svg"
+                  alt=""
+                  width="25px"
+                  @click="hideModal"
+                ></b-img>
               </div>
               <div class="d-block text-center">
                 <h1 class="judul_tambah_alamat mt-2">Tambah Alamat Baru</h1>
