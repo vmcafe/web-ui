@@ -28,11 +28,22 @@
     </b-dropdown-item>
     <b-dropdown-item class="usercard__extended">
       <nuxt-link to="/favorite">
-        <div class="usercard__extended__item my-2">Favorit</div>
+        <div class="usercard__extended__item my-2">Pesanan Saya</div>
       </nuxt-link>
     </b-dropdown-item>
-    <b-dropdown-item @click="logout()" class="usercard__extended my-2">
-      <div class="usercard__extended__item text-danger">Logout</div>
+    <b-dropdown-divider></b-dropdown-divider>
+    <b-dropdown-item class="usercard__extended my-2" @click="showModal">
+      <div class="usercard__extended__item text-danger">Keluar</div>
+      <b-modal ref="my-modal" class="modal" hide-header hide-footer size="sm">
+        <div class="d-block text-center">
+          <h1 class="content mt-2">Apakah Anda yakin</h1>
+          <h1 class="content mb-2">ingin keluar ?</h1>
+        </div>
+        <div class="btn_modal text-center mb-3 mt-2">
+          <b-button class="btn_keluar_modal" @click="logout()">Keluar</b-button>
+          <b-button class="btn_batal_modal" @click="hideModal">Batal</b-button>
+        </div>
+      </b-modal>
     </b-dropdown-item>
   </b-dropdown>
 </template>
@@ -79,6 +90,12 @@ export default {
         window.location.reload(true)
       }, 2000)
     },
+    showModal() {
+      this.$refs['my-modal'].show()
+    },
+    hideModal() {
+      this.$refs['my-modal'].hide()
+    },
   },
 }
 </script>
@@ -109,4 +126,32 @@ export default {
     background: none;
   }
 }
+
+.usercard__extended {
+  background-color: skinPrimary !important
+}
+
+.content {
+  font-size 30px
+  font normal normal Proxima Nova
+  letter-spacing 0.7px
+  color #2D4957
+}
+
+.btn_keluar_modal
+  background #B14141
+  border-radius: 5px;
+  opacity 1
+  font-size 20px
+  font normal normal Proxima Nova
+  letter-spacing 1.8px
+  color  #FFFFFF
+
+.btn_batal_modal
+  background #F6F6F6
+  font-size 20px
+  border-radius: 5px;
+  font normal normal Proxima Nova
+  letter-spacing 1.8px
+  color #2D4957
 </style>
