@@ -349,56 +349,7 @@
                       >Batal</b-button
                     >
                   </div>
-<<<<<<< Updated upstream
-                </b-form> -->
-                <!-- <form class="mail__form" @submit.stop.prevent="onSubmit">
-                  <div class="container w-100">
-                    <div class="row">
-                      <Field
-                        class="col-12 col-md-6 mb-1 field_input_mail mx-auto"
-                        type="text"
-                        placeholder="RECEIVER"
-                        :value="$v.form.receiver.$model"
-                        :error="
-                          $v.form.receiver.$dirty && $v.form.receiver.$error
-                        "
-                        @model="$v.form.receiver.$model = $event"
-                      />
-                      <Field
-                        class="col-12 col-md-6 mb-1 field_input_mail mx-auto"
-                        type="text"
-                        placeholder="PHONE"
-                        :value="$v.form.phone.$model"
-                        :error="$v.form.phone.$dirty && $v.form.phone.$error"
-                        @model="$v.form.phone.$model = $event"
-                      />
-                      <Field
-                        class="col-12 col-md-6 mb-1 field_input_mail mx-auto"
-                        type="text"
-                        placeholder="DISTRICT"
-                        :value="$v.form.district.$model"
-                        :error="
-                          $v.form.district.$dirty && $v.form.district.$error
-                        "
-                        @model="$v.form.district.$model = $event"
-                      />
-                      <Field
-                        class="col-12 col-md-6 mb-1 field_input_mail mx-auto"
-                        type="text"
-                        placeholder="POSTAL CODE"
-                        :value="$v.form.postal_code.$model"
-                        :error="
-                          $v.form.postal_code.$dirty &&
-                          $v.form.postal_code.$error
-                        "
-                        @model="$v.form.postal_code.$model = $event"
-                      />
-                    </div>
-                  </div>
-                </form> -->
-=======
                 </b-form>
->>>>>>> Stashed changes
               </div>
             </b-modal>
           </div>
