@@ -43,11 +43,7 @@
                 </span>
               </div>
               <input
-<<<<<<< Updated upstream
                 v-model="search"
-=======
-                v-model="$v.search"
->>>>>>> Stashed changes
                 class="form-control my-0 py-1"
                 type="text"
                 placeholder="Ingin cari apa?"

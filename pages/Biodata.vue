@@ -1117,7 +1117,6 @@ export default {
       if (!this.$v.form.$invalid) {
         this.isLoading = true
         try {
-<<<<<<< Updated upstream
           const resp = await this.$axios.$post('/api/address/add', this.form, {
             headers: this.headers,
           })
@@ -1125,14 +1124,6 @@ export default {
           setTimeout(() => {
             location.reload()
           }, 3000)
-=======
-          const resp = await this.$axios.$post('/api/address/add', this.form)
-          this.dataAddress = resp.data
-          setTimeout(() => {
-            this.isLoading = false
-            this.$router.push('/biodata')
-          }, 2000)
->>>>>>> Stashed changes
         } catch (error) {
           this.isLoading = false
           console.log(error)
