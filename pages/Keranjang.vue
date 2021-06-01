@@ -115,9 +115,11 @@
                   </b-col>
                 </b-row>
                 <b-row>
-                  <b-button class="button_bayar_content mt-2" href="/" block>
-                    Beli
-                  </b-button>
+                  <router-link class="w-100 mt-2" :to="'/detailpengiriman'">
+                    <b-button class="button_bayar_content w-100 mt-2">
+                      Beli
+                    </b-button>
+                  </router-link>
                 </b-row>
               </div>
             </div>

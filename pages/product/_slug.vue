@@ -33,35 +33,37 @@
             <div
               class="detail__description border-top border-bottom border-dark p-2 mb-3"
             >
-              {{ description }}
+              {{ dataSource && dataSource[0] && dataSource[0].description }}
             </div>
           </b-col>
           <b-col md="3" sm="12">
             <div class="nettoOrStock p-3 mb-3">
               <div class="nettoOrStock__label mb-1 pb-1">Netto</div>
               <div class="nettoOrStock__value font-italic font-weight-bold">
-                {{ netto }}
+                {{ dataSource && dataSource[0] && dataSource[0].netto }}
               </div>
             </div>
             <div class="nettoOrStock p-3">
               <div class="nettoOrStock__label mb-1 pb-1">Stok</div>
               <div class="nettoOrStock__value font-italic font-weight-bold">
-                {{ stock }}
+                {{ dataSource && dataSource[0] && dataSource[0].stock }}
               </div>
             </div>
           </b-col>
         </b-row>
         <div class="detail__price text-center font-weight-bold mb-4">
-          {{ price }}
+          <p>Rp {{ dataSource && dataSource[0] && dataSource[0].price }}</p>
         </div>
         <b-row>
           <b-col md="3" sm="12">
             <Counter class="mb-2" />
           </b-col>
           <b-col md="6" sm="6">
-            <b-button type="button" class="detail__button w-100 mb-2"
-              >BELI LANGSUNG</b-button
-            >
+            <router-link class="w-100 mb-2" :to="'/keranjang'">
+              <b-button type="button" class="detail__button w-100 mb-2">
+                BELI LANGSUNG
+              </b-button>
+            </router-link>
           </b-col>
           <b-col md="3" sm="6">
             <div class="d-flex flex-row align-items">

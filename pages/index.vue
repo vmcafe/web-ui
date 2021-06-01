@@ -98,6 +98,7 @@ export default {
       count: 0,
       dataSource: null,
       dataArticle: null,
+      searchData: null,
       swiperOption: {
         slidesPerView: 4,
         slidesPerColumn: 2,
@@ -173,8 +174,18 @@ export default {
   created() {
     this.fetchData()
     this.fetchArticle()
+    this.fetchSearch()
   },
+
   methods: {
+    async fetchSearch() {
+      try {
+        const resp = await this.$axios.$get(`/api/search`)
+        this.dataSource = resp.data
+      } catch (error) {
+        console.log(error)
+      }
+    },
     async fetchData() {
       try {
         const resp = await this.$axios.$get(`/api/product`)

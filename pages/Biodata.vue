@@ -653,21 +653,20 @@
                   <b-modal
                     class="modal__menunggu__pembayaran"
                     v-model="modalShow3"
+                    ref="my-modal"
                     id="modal-3"
                     title="BoostrapVue"
-                    ref="my-modal"
                     hide-header
                     hide-footer
                     size="md"
                   >
                     <div class="icon_close text-right">
-                      <a a href="/" target="">
-                        <b-img
-                          src="~/assets/Exit_icon.svg"
-                          alt=""
-                          width="25px"
-                        ></b-img>
-                      </a>
+                      <b-img
+                        src="~/assets/Exit_icon.svg"
+                        alt=""
+                        width="25px"
+                        @click="hideModal"
+                      ></b-img>
                     </div>
                     <div class="d-block text-center">
                       <h1 class="judul_tambah_alamat mt-2">Detail Pesanan</h1>
@@ -749,21 +748,20 @@
                   <b-modal
                     class="modal__menunggu__pembayaran"
                     v-model="modalShow4"
+                    ref="my-modal"
                     id="modal-4"
                     title="BoostrapVue"
-                    ref="my-modal"
                     hide-header
                     hide-footer
                     size="md"
                   >
                     <div class="icon_close text-right">
-                      <a a href="/" target="">
-                        <b-img
-                          src="~/assets/Exit_icon.svg"
-                          alt=""
-                          width="25px"
-                        ></b-img>
-                      </a>
+                      <b-img
+                        src="~/assets/Exit_icon.svg"
+                        alt=""
+                        width="25px"
+                        @click="hideModal"
+                      ></b-img>
                     </div>
                     <div class="d-block text-center">
                       <h1 class="judul_tambah_alamat mt-2">Detail Pesanan</h1>
@@ -832,21 +830,20 @@
                   <b-modal
                     class="modal__menunggu__pembayaran"
                     v-model="modalShow5"
+                    ref="my-modal"
                     id="modal-5"
                     title="BoostrapVue"
-                    ref="my-modal"
                     hide-header
                     hide-footer
                     size="md"
                   >
                     <div class="icon_close text-right">
-                      <a a href="/" target="">
-                        <b-img
-                          src="~/assets/Exit_icon.svg"
-                          alt=""
-                          width="25px"
-                        ></b-img>
-                      </a>
+                      <b-img
+                        src="~/assets/Exit_icon.svg"
+                        alt=""
+                        width="25px"
+                        @click="hideModal"
+                      ></b-img>
                     </div>
                     <div class="d-block text-center">
                       <h1 class="judul_tambah_alamat mt-2">Detail Pesanan</h1>
@@ -927,21 +924,20 @@
                   <b-modal
                     class="modal__menunggu__pembayaran"
                     v-model="modalShow6"
+                    ref="my-modal"
                     id="modal-6"
                     title="BoostrapVue"
-                    ref="my-modal"
                     hide-header
                     hide-footer
                     size="md"
                   >
                     <div class="icon_close text-right">
-                      <a a href="/" target="">
-                        <b-img
-                          src="~/assets/Exit_icon.svg"
-                          alt=""
-                          width="25px"
-                        ></b-img>
-                      </a>
+                      <b-img
+                        src="~/assets/Exit_icon.svg"
+                        alt=""
+                        width="25px"
+                        @click="hideModal"
+                      ></b-img>
                     </div>
                     <div class="d-block text-center">
                       <h1 class="judul_tambah_alamat mt-2">Detail Pesanan</h1>

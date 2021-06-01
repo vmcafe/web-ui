@@ -4,7 +4,7 @@
     <div v-else class="login">
       <div class="login__container container">
         <div class="login__container__mail mail">
-          <Heading class="sso__heading">Masuk dengan</Heading>
+          <!-- <Heading class="sso__heading">Masuk dengan</Heading>
           <div class="container w-100">
             <div class="row">
               <SingleSignOn
@@ -35,7 +35,7 @@
               >
             </div>
           </div>
-          <div class="atau__heading">ATAU</div>
+          <div class="atau__heading">ATAU</div> -->
           <Heading class="mail__heading">Masuk dengan email</Heading>
           <form class="mail__form" @submit.prevent="onSubmit()">
             <div class="container w-100">
@@ -78,19 +78,20 @@
     <b-modal
       class="modal__login my-auto"
       ref="modal-status"
+      centered
       size="sm"
       title="Status"
       hide-header
       hide-footer
     >
       <div class="d-flex flex-column align-items-center justify-content-center">
-        <img
+        <b-img
           v-if="isSuccess"
           style="width: 124px"
           src="~/assets/success.png"
           alt=""
         />
-        <img v-else src="~/assets/failed.png" style="width: 124px" alt="" />
+        <b-img v-else src="~/assets/failed.png" style="width: 124px" alt="" />
         <Heading class="mt-2">
           {{ isSuccess ? 'Berhasil Masuk!' : 'Gagal Masuk!' }}
         </Heading>
@@ -103,7 +104,6 @@
 import Heading from '@/components/Headings/Heading'
 import Field from '@/components/Fields/FieldInput'
 import Button from '@/components/Buttons/RightIconBtn'
-import SingleSignOn from '@/components/Buttons/SingleSignOnBtn'
 import TextLink from '@/components/TextLink'
 import { required, email } from 'vuelidate/lib/validators'
 
@@ -113,7 +113,6 @@ export default {
     Field,
     Button,
     TextLink,
-    SingleSignOn,
   },
   layout: 'Auth',
   data() {
@@ -195,4 +194,9 @@ export default {
   height 20px
   margin-left 10px
   margin-top -7px !important
+
+.modal__login
+  transform translate(0,-50%)
+    top 50%
+    margin 0 auto
 </style>

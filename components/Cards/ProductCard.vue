@@ -27,11 +27,11 @@
       alt=""
     />
     <img
-        v-if="love"
-        class="product__favorite"
-        src="~/assets/heart.png"
-        alt=""
-      />
+      v-if="love"
+      class="product__favorite"
+      src="~/assets/heart.png"
+      alt=""
+    />
   </div>
 </template>
 
@@ -80,7 +80,7 @@ export default {
     bottom 12px
     width 18px
     height 18px
-  
+
   &__favorite
     position absolute
     left 12px

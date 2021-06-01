@@ -43,7 +43,7 @@
                 </span>
               </div>
               <input
-                v-model="serach"
+                v-model="search"
                 class="form-control my-0 py-1"
                 type="text"
                 placeholder="Ingin cari apa?"
