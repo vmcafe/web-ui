@@ -43,7 +43,11 @@
                 </span>
               </div>
               <input
+<<<<<<< Updated upstream
                 v-model="search"
+=======
+                v-model="$v.search"
+>>>>>>> Stashed changes
                 class="form-control my-0 py-1"
                 type="text"
                 placeholder="Ingin cari apa?"
@@ -87,7 +91,7 @@ export default {
   methods: {
     async searchFood() {
       try {
-        const resp = await this.$axios.$get(`/api/product`)
+        const resp = await this.$axios.$get(`/api/search`)
         this.dataArticle = resp.data
       } catch (error) {
         console.log(error)

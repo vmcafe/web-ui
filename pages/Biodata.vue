@@ -314,12 +314,11 @@
                         type="text"
                         class="input_modal"
                         required
-                        :value="$v.form.postal_code.$model"
                         :error="
                           $v.form.postal_code.$dirty &&
                           $v.form.postal_code.$error
                         "
-                        @model="$v.form.postal_code.$model = $event"
+                        v-model="$v.form.postal_code.$model"
                       ></b-form-input>
                     </b-col>
                   </b-row>
@@ -350,6 +349,7 @@
                       >Batal</b-button
                     >
                   </div>
+<<<<<<< Updated upstream
                 </b-form> -->
                 <!-- <form class="mail__form" @submit.stop.prevent="onSubmit">
                   <div class="container w-100">
@@ -396,6 +396,9 @@
                     </div>
                   </div>
                 </form> -->
+=======
+                </b-form>
+>>>>>>> Stashed changes
               </div>
             </b-modal>
           </div>
@@ -641,14 +644,14 @@
               </tr>
             </thead>
             <tbody>
-              <tr>
+              <tr v-for="item in dataOrder" :key="item.id">
                 <td>
                   <div
                     class="table__pesanan__status"
                     @click="modalShow3 = !modalShow3"
                     alt=""
                   >
-                    Menunggu pembayaran
+                    {{ item.status }}
                   </div>
                   <b-modal
                     class="modal__menunggu__pembayaran"
@@ -714,23 +717,24 @@
                   </b-modal>
                 </td>
                 <td>
-                  <div>253478493750</div>
+                  <div>{{ item.invoice }}</div>
                 </td>
                 <td>
                   <div>
                     <div>Yudistryan Izhar</div>
-                    <div>+085884070122</div>
+                    <div>{{ item.phone }}</div>
                   </div>
                 </td>
                 <td>
                   <div>
                     <div>Rumah</div>
-                    <div>Jl. Karang kitri no.52 Kandangan, ds. Kandangan</div>
+                    <div>{{ item.street }}</div>
                   </div>
                 </td>
                 <td>
                   <div>
-                    <div>Fruity Nastar (M) - 1</div>
+                    <div>quantity</div>
+                    // nama pesanan dan jumlah masih jadi satu
                   </div>
                 </td>
               </tr>
@@ -1026,6 +1030,7 @@ export default {
       modalShow6: false,
       isLoading: false,
       dataAddress: null,
+      dataOrder: null,
       headers: {
         'Content-Type': 'application/json',
         Authorization: `Bearer ${
@@ -1038,6 +1043,13 @@ export default {
         district: '',
         postal_code: '',
         street: '',
+      },
+      myOrder: {
+        status: '',
+        invoice: '',
+        phone: '',
+        street: '',
+        quantity: '',
       },
     }
   },
@@ -1059,10 +1071,28 @@ export default {
         required,
       },
     },
+    myOrder: {
+      status: {
+        required,
+      },
+      invoice: {
+        required,
+      },
+      phone: {
+        required,
+      },
+      street: {
+        required,
+      },
+      quantity: {
+        required,
+      },
+    },
   },
   created() {
     this.fetchData()
     this.listAddress()
+    this.listOrder()
   },
   methods: {
     async fetchData() {
@@ -1087,6 +1117,7 @@ export default {
       if (!this.$v.form.$invalid) {
         this.isLoading = true
         try {
+<<<<<<< Updated upstream
           const resp = await this.$axios.$post('/api/address/add', this.form, {
             headers: this.headers,
           })
@@ -1094,6 +1125,14 @@ export default {
           setTimeout(() => {
             location.reload()
           }, 3000)
+=======
+          const resp = await this.$axios.$post('/api/address/add', this.form)
+          this.dataAddress = resp.data
+          setTimeout(() => {
+            this.isLoading = false
+            this.$router.push('/biodata')
+          }, 2000)
+>>>>>>> Stashed changes
         } catch (error) {
           this.isLoading = false
           console.log(error)
@@ -1112,6 +1151,19 @@ export default {
         this.isLoading = false
       } catch (error) {
         this.$toast.error('Gagal mendapatkan data user').goAway(3000) // if user need to know
+        this.isLoading = false
+      }
+    },
+    async listOrder() {
+      this.isLoading = true
+      try {
+        const resp = await this.$axios.$get(`/api/order`, {
+          headers: this.headers,
+        })
+        this.dataOrder = resp.data
+        this.isLoading = false
+      } catch (error) {
+        this.$toast.error('Gagal mendapatkan data order').goAway(3000) // if user need to know
         this.isLoading = false
       }
     },
@@ -1284,6 +1336,7 @@ export default {
 }
 
 .btn_tambah_modal {
+  margin-top: 40px;
   background: #2D4957;
   opacity: 1;
   font-size: 15px;
@@ -1294,6 +1347,7 @@ export default {
 }
 
 .btn_batal_modal {
+  margin-top: 40px;
   margin-left: 5px;
   background: #F6F6F6;
   font-size: 15px;
