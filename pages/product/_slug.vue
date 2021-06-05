@@ -52,11 +52,7 @@
           </b-col>
         </b-row>
         <div class="detail__price text-center font-weight-bold mb-4">
-<<<<<<< Updated upstream
           <p>Rp {{ dataSource && dataSource[0] && dataSource[0].price }}</p>
-=======
-          {{ dataSource && dataSource[0] && dataSource[0].price }}
->>>>>>> Stashed changes
         </div>
         <b-row>
           <b-col md="3" sm="12">
