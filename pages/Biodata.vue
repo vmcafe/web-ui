@@ -239,117 +239,6 @@
                     >
                   </div>
                 </form>
-                <!-- <b-form
-                  class="form_modal_content"
-                  @submit.stop.prevent="onSubmit"
-                >
-                  <b-row>
-                    <b-col cols="6">
-                      <label
-                        for="nama_penerima"
-                        invalid-feedback="Nama alamat is required"
-                        class="label_modal mb-1 pt-2"
-                        >Nama penerima</label
-                      >
-                      <b-form-input
-                        id="nama_penerima"
-                        placeholder="Yudistryan Izhar"
-                        type="text"
-                        class="input_modal"
-                        required
-                        :error="
-                          $v.form.receiver.$dirty && $v.form.receiver.$error
-                        "
-                        v-model="$v.form.receiver.$model"
-                      ></b-form-input>
-                    </b-col>
-                    <b-col cols="6">
-                      <label
-                        for="no_hp"
-                        invalid-feedback="Nama alamat is required"
-                        class="label_modal mb-1 pt-2"
-                        >No HP</label
-                      >
-                      <b-form-input
-                        id="no_hp"
-                        placeholder="+628131151080"
-                        type="text"
-                        class="input_modal"
-                        required
-                        :error="$v.form.phone.$dirty && $v.form.phone.$error"
-                        v-model="$v.form.phone.$model"
-                      ></b-form-input>
-                    </b-col>
-                  </b-row>
-                  <b-row>
-                    <b-col cols="8">
-                      <label
-                        for="kec_kota"
-                        invalid-feedback="Nama alamat is required"
-                        class="label_modal mb-1 pt-2"
-                        >Kecamatan / Kota</label
-                      >
-                      <b-form-input
-                        id="kec_kota"
-                        placeholder="Kandangan, Kab. Kediri, Jawa Timur"
-                        type="text"
-                        class="input_modal"
-                        required
-                        :error="
-                          $v.form.district.$dirty && $v.form.district.$error
-                        "
-                        v-model="$v.form.district.$model"
-                      ></b-form-input>
-                    </b-col>
-                    <b-col cols="4">
-                      <label
-                        for="kode_pos"
-                        invalid-feedback="Nama alamat is required"
-                        class="label_modal mb-1 pt-2"
-                        >Kode Pos</label
-                      >
-                      <b-form-input
-                        id="kode_pos"
-                        placeholder="642942"
-                        type="text"
-                        class="input_modal"
-                        required
-                        :error="
-                          $v.form.postal_code.$dirty &&
-                          $v.form.postal_code.$error
-                        "
-                        v-model="$v.form.postal_code.$model"
-                      ></b-form-input>
-                    </b-col>
-                  </b-row>
-                  <b-row>
-                    <b-col>
-                      <label
-                        for="alamat"
-                        invalid-feedback="Nama alamat is required"
-                        class="label_modal mb-1 pt-2"
-                        >Alamat</label
-                      >
-                      <b-form-textarea
-                        id="alamat"
-                        placeholder="Jl. Karang kitri no. 52, Kandangan"
-                        type="text"
-                        class="input_modal"
-                        required
-                        :error="$v.form.street.$dirty && $v.form.street.$error"
-                        v-model="$v.form.street.$model"
-                      ></b-form-textarea>
-                    </b-col>
-                  </b-row>
-                  <div class="btn_modal text-center mb-3">
-                    <b-button class="btn_tambah_modal" type="submit"
-                      >+ Tambah</b-button
-                    >
-                    <b-button class="btn_batal_modal" @click="hideModal"
-                      >Batal</b-button
-                    >
-                  </div>
-                </b-form>
               </div>
             </b-modal>
           </div>
@@ -382,7 +271,7 @@
                 <th scope="col">PENERIMA</th>
                 <th scope="col">ALAMAT PENGIRIMAN</th>
                 <th scope="col">DAERAH PENGIRIMAN</th>
-                <th scope="col"></th>
+                <th colspan="2" scope="col"></th>
               </tr>
             </thead>
             <tbody>
@@ -406,159 +295,235 @@
                   </div>
                 </td>
                 <td>
-                  <div class="action d-flex">
-                    <b-img
-                      class="action__edit"
-                      @click="modalShow1 = !modalShow1"
-                      src="~/assets/icons/ic_edit.svg"
-                      alt=""
-                    >
-                    </b-img>
-                    <b-modal
-                      class="modal_edit_alamat"
-                      v-model="modalShow1"
-                      id="modal-2"
-                      title="BootstrapVue"
-                      ref="my-modal"
-                      hide-header
-                      hide-footer
-                      size="md"
-                    >
-                      <div class="d-block text-center">
-                        <h1 class="judul_tambah_alamat mt-2">Edit Alamat?</h1>
-                      </div>
-                      <div class="form_modal pt-4 pb-2 px-2">
-                        <b-form-group class="form_modal_content">
-                          <b-row>
-                            <b-col cols="6">
-                              <label
-                                for="nama_penerima"
-                                invalid-feedback="Nama alamat is required"
-                                class="label_modal mb-1 pt-2"
-                                >Nama penerima</label
-                              >
-                              <b-form-input
-                                id="nama_penerima"
-                                placeholder="Yudistryan Izhar"
-                                type="text"
-                                class="input_modal"
-                                required
-                              ></b-form-input>
-                            </b-col>
-                            <b-col cols="6">
-                              <label
-                                for="no_hp"
-                                invalid-feedback="Nama alamat is required"
-                                class="label_modal mb-1 pt-2"
-                                >No HP</label
-                              >
-                              <b-form-input
-                                id="no_hp"
-                                placeholder="+628131151080"
-                                type="text"
-                                class="input_modal"
-                                required
-                              ></b-form-input>
-                            </b-col>
-                          </b-row>
-                          <b-row>
-                            <b-col cols="8">
-                              <label
-                                for="kec_kota"
-                                invalid-feedback="Nama alamat is required"
-                                class="label_modal mb-1 pt-2"
-                                >Kecamatan / Kota</label
-                              >
-                              <b-form-input
-                                id="kec_kota"
-                                placeholder="Kandangan, Kab. Kediri, Jawa Timur"
-                                type="text"
-                                class="input_modal"
-                                required
-                              ></b-form-input>
-                            </b-col>
-                            <b-col cols="4">
-                              <label
-                                for="kode_pos"
-                                invalid-feedback="Nama alamat is required"
-                                class="label_modal mb-1 pt-2"
-                                >Kode Pos</label
-                              >
-                              <b-form-input
-                                id="kode_pos"
-                                placeholder="642942"
-                                type="text"
-                                class="input_modal"
-                                required
-                              ></b-form-input>
-                            </b-col>
-                          </b-row>
-                          <b-row>
-                            <b-col>
-                              <label
-                                for="alamat"
-                                invalid-feedback="Nama alamat is required"
-                                class="label_modal mb-1 pt-2"
-                                >Alamat</label
-                              >
-                              <b-form-textarea
-                                id="alamat"
-                                placeholder="Jl. Karang kitri no. 52, Kandangan"
-                                type="text"
-                                class="input_modal"
-                                required
-                              ></b-form-textarea>
-                            </b-col>
-                          </b-row>
-                        </b-form-group>
-                      </div>
-                      <div class="btn_modal text-center mb-3">
-                        <b-button class="btn_edit_modal" @click="hideModal"
-                          >Simpan</b-button
-                        >
-                        <b-button class="btn_batal_modal" @click="hideModal"
-                          >Batal</b-button
-                        >
-                      </div>
-                    </b-modal>
-                    <div>
-                      <b-img
-                        class="action__hapus ml-3"
-                        @click="modalShow2 = !modalShow2"
-                        src="~/assets/icons/ic_trashcan.svg"
-                        alt=""
-                      >
-                      </b-img>
-                      <b-modal
-                        class="modal_hapus_alamat"
-                        v-model="modalShow2"
-                        id="modal-3"
-                        title="BootstrapVue"
-                        ref="my-modal"
-                        hide-header
-                        hide-footer
-                        size="md"
-                      >
-                        <div class="d-block text-center">
-                          <h1 class="judul_tambah_alamat mt-2">
-                            Anda yakin menghapus alamat ini?
-                          </h1>
-                        </div>
-                        <div class="form_modal pt-4 pb-2 px-2">
-                          <b-form-group class="form_modal_content">
-                          </b-form-group>
-                        </div>
-                        <div class="btn_modal text-center mb-3">
-                          <b-button class="btn_edit_modal" @click="hideModal"
-                            >Hapus</b-button
-                          >
-                          <b-button class="btn_batal_red" @click="hideModal"
-                            >Batal</b-button
-                          >
-                        </div>
-                      </b-modal>
+                  <b-img
+                    class="action__edit"
+                    @click="modalShow1 = !modalShow1"
+                    src="~/assets/icons/ic_edit.svg"
+                    alt=""
+                  >
+                  </b-img>
+                  <b-modal
+                    class="modal_edit_alamat"
+                    v-model="modalShow1"
+                    id="modal-2"
+                    title="BootstrapVue"
+                    ref="my-modal"
+                    hide-header
+                    hide-footer
+                    size="md"
+                  >
+                    <div class="d-block text-center">
+                      <h1 class="judul_tambah_alamat mt-2">Edit Alamat?</h1>
                     </div>
-                  </div>
+                    <div class="form_modal pt-4 pb-2 px-2">
+                      <b-form-group class="form_modal_content">
+                        <b-row>
+                          <b-col cols="6">
+                            <label
+                              for="nama_penerima"
+                              invalid-feedback="Nama alamat is required"
+                              class="label_modal mb-1 pt-2"
+                              >Nama penerima</label
+                            >
+                            <b-form-input
+                              id="nama_penerima"
+                              placeholder="Yudistryan Izhar"
+                              type="text"
+                              class="input_modal"
+                              required
+                            ></b-form-input>
+                          </b-col>
+                          <b-col cols="6">
+                            <label
+                              for="no_hp"
+                              invalid-feedback="Nama alamat is required"
+                              class="label_modal mb-1 pt-2"
+                              >No HP</label
+                            >
+                            <b-form-input
+                              id="no_hp"
+                              placeholder="+628131151080"
+                              type="text"
+                              class="input_modal"
+                              required
+                            ></b-form-input>
+                          </b-col>
+                        </b-row>
+                        <b-row>
+                          <b-col cols="8">
+                            <label
+                              for="kec_kota"
+                              invalid-feedback="Nama alamat is required"
+                              class="label_modal mb-1 pt-2"
+                              >Kecamatan / Kota</label
+                            >
+                            <b-form-input
+                              id="kec_kota"
+                              placeholder="Kandangan, Kab. Kediri, Jawa Timur"
+                              type="text"
+                              class="input_modal"
+                              required
+                            ></b-form-input>
+                          </b-col>
+                          <b-col cols="4">
+                            <label
+                              for="kode_pos"
+                              invalid-feedback="Nama alamat is required"
+                              class="label_modal mb-1 pt-2"
+                              >Kode Pos</label
+                            >
+                            <b-form-input
+                              id="kode_pos"
+                              placeholder="642942"
+                              type="text"
+                              class="input_modal"
+                              required
+                            ></b-form-input>
+                          </b-col>
+                        </b-row>
+                        <b-row>
+                          <b-col>
+                            <label
+                              for="alamat"
+                              invalid-feedback="Nama alamat is required"
+                              class="label_modal mb-1 pt-2"
+                              >Alamat</label
+                            >
+                            <b-form-textarea
+                              id="alamat"
+                              placeholder="Jl. Karang kitri no. 52, Kandangan"
+                              type="text"
+                              class="input_modal"
+                              required
+                            ></b-form-textarea>
+                          </b-col>
+                        </b-row>
+                      </b-form-group>
+                    </div>
+                    <div class="btn_modal text-center mb-3">
+                      <b-button class="btn_edit_modal" @click="hideModal"
+                        >Simpan</b-button
+                      >
+                      <b-button class="btn_batal_modal" @click="hideModal"
+                        >Batal</b-button
+                      >
+                    </div>
+                  </b-modal>
+                </td>
+                <td>
+                  <b-img
+                    class="action__hapus ml-3"
+                    src="~/assets/icons/ic_trashcan.svg"
+                    alt=""
+                  >
+                  </b-img>
+                  <b-modal
+                    class="modal_edit_alamat"
+                    v-model="modalShow1"
+                    id="modal-2"
+                    title="BootstrapVue"
+                    ref="my-modal"
+                    hide-header
+                    hide-footer
+                    size="md"
+                  >
+                    <div class="d-block text-center">
+                      <h1 class="judul_tambah_alamat mt-2">Edit Alamat?</h1>
+                    </div>
+                    <div class="form_modal pt-4 pb-2 px-2">
+                      <b-form-group class="form_modal_content">
+                        <b-row>
+                          <b-col cols="6">
+                            <label
+                              for="nama_penerima"
+                              invalid-feedback="Nama alamat is required"
+                              class="label_modal mb-1 pt-2"
+                              >Nama penerima</label
+                            >
+                            <b-form-input
+                              id="nama_penerima"
+                              placeholder="Yudistryan Izhar"
+                              type="text"
+                              class="input_modal"
+                              required
+                            ></b-form-input>
+                          </b-col>
+                          <b-col cols="6">
+                            <label
+                              for="no_hp"
+                              invalid-feedback="Nama alamat is required"
+                              class="label_modal mb-1 pt-2"
+                              >No HP</label
+                            >
+                            <b-form-input
+                              id="no_hp"
+                              placeholder="+628131151080"
+                              type="text"
+                              class="input_modal"
+                              required
+                            ></b-form-input>
+                          </b-col>
+                        </b-row>
+                        <b-row>
+                          <b-col cols="8">
+                            <label
+                              for="kec_kota"
+                              invalid-feedback="Nama alamat is required"
+                              class="label_modal mb-1 pt-2"
+                              >Kecamatan / Kota</label
+                            >
+                            <b-form-input
+                              id="kec_kota"
+                              placeholder="Kandangan, Kab. Kediri, Jawa Timur"
+                              type="text"
+                              class="input_modal"
+                              required
+                            ></b-form-input>
+                          </b-col>
+                          <b-col cols="4">
+                            <label
+                              for="kode_pos"
+                              invalid-feedback="Nama alamat is required"
+                              class="label_modal mb-1 pt-2"
+                              >Kode Pos</label
+                            >
+                            <b-form-input
+                              id="kode_pos"
+                              placeholder="642942"
+                              type="text"
+                              class="input_modal"
+                              required
+                            ></b-form-input>
+                          </b-col>
+                        </b-row>
+                        <b-row>
+                          <b-col>
+                            <label
+                              for="alamat"
+                              invalid-feedback="Nama alamat is required"
+                              class="label_modal mb-1 pt-2"
+                              >Alamat</label
+                            >
+                            <b-form-textarea
+                              id="alamat"
+                              placeholder="Jl. Karang kitri no. 52, Kandangan"
+                              type="text"
+                              class="input_modal"
+                              required
+                            ></b-form-textarea>
+                          </b-col>
+                        </b-row>
+                      </b-form-group>
+                    </div>
+                    <div class="btn_modal text-center mb-3">
+                      <b-button class="btn_edit_modal" @click="hideModal"
+                        >Simpan</b-button
+                      >
+                      <b-button class="btn_batal_modal" @click="hideModal"
+                        >Batal</b-button
+                      >
+                    </div>
+                  </b-modal>
                 </td>
               </tr>
             </tbody>

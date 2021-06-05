@@ -35,9 +35,9 @@
     <b-dropdown-item class="usercard__extended my-2" @click="showModal">
       <div class="usercard__extended__item text-danger">Keluar</div>
       <b-modal ref="my-modal" class="modal" hide-header hide-footer size="sm">
-        <div class="d-block text-center">
-          <h1 class="content mt-2">Apakah Anda yakin</h1>
-          <h1 class="content mb-2">ingin keluar ?</h1>
+        <div class="pertanyaan d-block text-center">
+          <h1 class="isi_pertanyaan mt-2">Apakah Anda yakin</h1>
+          <h1 class="isi_pertanyaan mb-2">ingin keluar ?</h1>
         </div>
         <div class="btn_modal text-center mb-3 mt-2">
           <b-button class="btn_keluar_modal" @click="logout()">Keluar</b-button>
@@ -131,27 +131,31 @@ export default {
   background-color: skinPrimary !important
 }
 
-.content {
+.isi_pertanyaan {
   font-size 30px
   font normal normal Proxima Nova
   letter-spacing 0.7px
   color #2D4957
 }
 
+.pertanyaan {
+  border-bottom 1px solid #00000061
+}
+
 .btn_keluar_modal
-  background #B14141
+  background #F6F6F6
   border-radius: 5px;
   opacity 1
   font-size 20px
   font normal normal Proxima Nova
   letter-spacing 1.8px
-  color  #FFFFFF
+  color  #2D4957
 
 .btn_batal_modal
-  background #F6F6F6
+  background #B14141
   font-size 20px
   border-radius: 5px;
   font normal normal Proxima Nova
   letter-spacing 1.8px
-  color #2D4957
+  color #f6f6f6
 </style>
