@@ -46,7 +46,7 @@
               {{ isEdit ? 'SIMPAN' : 'UBAH' }}
             </b-button>
           </b-row>
-          <b-row>
+          <b-row v-for="item in dataSource" :key="item.id">
             <div class="avatar">
               <b-col class="relative__profile">
                 <b-avatar
@@ -62,57 +62,48 @@
                     width="45px"
                   ></b-img>
                 </div>
-                <b-row>
-                  <b-text class="nama_lengkap mx-auto">Yudistryan</b-text>
-                </b-row>
               </b-col>
             </div>
             <b-col>
               <div class="form_group1">
-                <div class="keterangan mt-2">NAMA DEPAN {{ text }}</div>
+                <div class="keterangan mt-2">NAMA</div>
                 <input
                   :class="`input text-center ${isEdit && 'input_show'}`"
                   type="text"
-                  placeholder="Nama Depan"
+                  :value="item.name"
                   :disabled="!isEdit"
                 />
-                <div class="keterangan mt-2">TANGGAL LAHIR {{ text }}</div>
+                <div class="keterangan mt-2">TANGGAL LAHIR</div>
                 <input
                   :class="`input text-center ${isEdit && 'input_show'}`"
                   type="text"
-                  placeholder="Tanggal Lahir"
+                  placeholder="YYYY-DD-MM"
+                  :value="item.birthday"
                   :disabled="!isEdit"
                 />
-                <div class="keterangan mt-2">EMAIL {{ text }}</div>
+                <div class="keterangan mt-2">EMAIL</div>
                 <input
                   :class="`input text-center ${isEdit && 'input_show'}`"
                   type="text"
-                  placeholder="Email"
+                  :value="item.email"
                   :disabled="!isEdit"
                 />
               </div>
             </b-col>
             <b-col>
               <div class="form_group2">
-                <div class="keterangan mt-2">NAMA BELAKANG {{ text }}</div>
+                <div class="keterangan mt-2">JENIS KELAMIN</div>
                 <input
                   :class="`input text-center ${isEdit && 'input_show'}`"
                   type="text"
-                  placeholder="Nama Belakang"
+                  :value="item.gender"
                   :disabled="!isEdit"
                 />
-                <div class="keterangan mt-2">JENIS KELAMIN {{ text }}</div>
+                <div class="keterangan mt-2">NO. HP</div>
                 <input
                   :class="`input text-center ${isEdit && 'input_show'}`"
                   type="text"
-                  placeholder="Jenis Kelamin"
-                  :disabled="!isEdit"
-                />
-                <div class="keterangan mt-2">NO. HP {{ text }}</div>
-                <input
-                  :class="`input text-center ${isEdit && 'input_show'}`"
-                  type="text"
-                  placeholder="No Hp"
+                  :value="item.phone"
                   :disabled="!isEdit"
                 />
               </div>
@@ -239,7 +230,7 @@
                     >
                   </div>
                 </form>
-                <!-- <b-form
+                <b-form
                   class="form_modal_content"
                   @submit.stop.prevent="onSubmit"
                 >
@@ -672,20 +663,19 @@
                 </td>
                 <td>
                   <div>
-                    <div>Yudistryan Izhar</div>
-                    <div>{{ item.phone }}</div>
+                    <div>{{ item.address.receiver }}</div>
+                    <div>{{ item.address.phone }}</div>
                   </div>
                 </td>
                 <td>
                   <div>
-                    <div>Rumah</div>
-                    <div>{{ item.street }}</div>
+                    <div>{{ item.address.district }}</div>
+                    <div>{{ item.address.street }}</div>
                   </div>
                 </td>
                 <td>
                   <div>
-                    <div>quantity</div>
-                    // nama pesanan dan jumlah masih jadi satu
+                    <div>{{ item.products.name + ' - ' + item.quantity }}</div>
                   </div>
                 </td>
               </tr>
@@ -1048,7 +1038,9 @@ export default {
   methods: {
     async fetchData() {
       try {
-        const resp = await this.$axios.$get(`/api/product`)
+        const resp = await this.$axios.$get(`/api/profile/get`, {
+          headers: this.headers,
+        })
         this.dataSource = resp.data
       } catch (error) {
         console.log(error)
@@ -1071,7 +1063,7 @@ export default {
           const resp = await this.$axios.$post('/api/address/add', this.form, {
             headers: this.headers,
           })
-          this.dataAddress = resp.data
+          this.dataProfile = resp.data
           setTimeout(() => {
             location.reload()
           }, 3000)
