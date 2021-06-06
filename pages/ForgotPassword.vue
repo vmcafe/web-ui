@@ -145,7 +145,7 @@ export default {
 
 .text_lupa_kata_kunci
   font-size 22px
-  font normal normal Proxima Nova
+  font normal normal normal Proxima Nova
   text-align justify
   letter-spacing -0.15px
   color #000000
