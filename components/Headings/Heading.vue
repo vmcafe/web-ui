@@ -13,7 +13,7 @@ export default {}
 .heading
   text-align center
   letter-spacing -0.21px
-  color blackMamba
-  font-size 19px
+  color #000
+  font-weight bold
   font normal normal medium 32px/41px Futura PT
 </style>

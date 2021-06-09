@@ -4,7 +4,7 @@
     <div v-else class="register">
       <div class="register__container container">
         <div class="register__container__mail mail">
-          <Heading class="sso__heading">Daftar dengan</Heading>
+          <!-- <Heading class="sso__heading">Daftar dengan</Heading>
           <div class="container w-100">
             <div class="row">
               <SingleSignOn
@@ -35,7 +35,7 @@
               >
             </div>
           </div>
-          <div class="atau__heading">ATAU</div>
+          <div class="atau__heading">ATAU</div> -->
           <Heading class="mail__heading">Daftar dengan email</Heading>
           <form class="mail__form" @submit.stop.prevent="onSubmit">
             <div class="container w-100">
@@ -85,15 +85,18 @@
               </div>
             </div>
           </form>
-          <Heading class="mb-2 mt-4">Sudah memiliki akun?</Heading>
-          <nuxt-link to="/login">
-            <TextLink class="mb-5">MASUK</TextLink>
-          </nuxt-link>
+          <Heading class="mb-2 mt-5">Sudah memiliki akun?</Heading>
+          <div>
+            <nuxt-link to="/login">
+              <TextLink class="masuk_link mb-5 pt-2">MASUK</TextLink>
+            </nuxt-link>
+          </div>
         </div>
       </div>
     </div>
     <b-modal
       ref="modal-status"
+      centered
       size="sm"
       class="register__modal"
       title="Status"
@@ -121,7 +124,6 @@ import Heading from '@/components/Headings/Heading'
 import Field from '@/components/Fields/FieldInput'
 import Gender from '@/components/Fields/FieldGender'
 import Button from '@/components/Buttons/RightIconBtn'
-import SingleSignOn from '@/components/Buttons/SingleSignOnBtn'
 import TextLink from '@/components/TextLink'
 import { required, email, helpers } from 'vuelidate/lib/validators'
 const alpha = helpers.regex('alpha', /^\+?([ -]?\d+)+|\(\d+\)([ -]\d+)/)
@@ -132,7 +134,6 @@ export default {
     Button,
     TextLink,
     Gender,
-    SingleSignOn,
   },
   layout: 'Auth',
   data() {
@@ -200,9 +201,10 @@ export default {
 .register
   &__container
     &__mail
+    position relative
     .mail
       &__heading
-        margin-bottom 20px
+        margin-bottom 30px
 
 .sso__heading, .atau__heading
   margin-bottom 20px
@@ -224,4 +226,11 @@ export default {
 
 .field_input_mail
   max-width 286px
+
+.masuk_link
+  display inline-block
+  border-bottom 6px solid #d9DEF1
+  position absolute
+  left 50%
+  transform translateX(-50%)
 </style>

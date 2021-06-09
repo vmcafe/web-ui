@@ -68,9 +68,9 @@
           <nuxt-link to="/forgotpassword">
             <TextLink class="lupa_kata_kunci mb-4">LUPA KATA KUNCI?</TextLink>
           </nuxt-link>
-          <Heading class="mb-2">Belum punya akun?</Heading>
+          <Heading class="belum_punya_akun mb-2">Belum punya akun?</Heading>
           <nuxt-link to="/register">
-            <TextLink class="mb-5">DAFTAR</TextLink>
+            <TextLink class="daftar mb-5 pt-1">DAFTAR</TextLink>
           </nuxt-link>
         </div>
       </div>
@@ -173,9 +173,10 @@ export default {
 .login
   &__container
     &__mail
+    position relative
     .mail
       &__heading
-        margin-bottom 20px
+        margin-bottom 30px
 
 .sso__heading, .atau__heading
   margin-bottom 20px
@@ -197,6 +198,26 @@ export default {
 
 .modal__login
   transform translate(0,-50%)
-    top 50%
-    margin 0 auto
+  top 50%
+  margin 0 auto
+
+.lupa_kata_kunci
+  display inline-block
+  border-bottom 6px solid #d9DEF1
+  position absolute
+  left 50%
+  transform translateX(-50%)
+
+.field_input_mail
+  width 286px
+
+.belum_punya_akun
+  margin-top 90px
+
+.daftar
+  display inline-block
+  border-bottom 6px solid #d9DEF1
+  position absolute
+  left 50%
+  transform translateX(-50%)
 </style>
