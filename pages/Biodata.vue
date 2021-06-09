@@ -1186,6 +1186,20 @@ export default {
   border-radius: 5px;
 }
 
+.modal_edit_alamat {
+  border-radius: 10px;
+}
+
+.judul_edit_alamat {
+  font-size: 18px;
+  font-weight: bold;
+  font: normal normal Proxima Nova;
+  letter-spacing: 3px;
+  color: #2D4957;
+  border-bottom: 1px solid #2D4957;
+  padding-bottom: 7px;
+}
+
 .btn_batal_modal {
   margin-top: 40px;
   margin-left: 5px;

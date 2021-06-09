@@ -26,12 +26,6 @@
       </b-carousel-slide>
     </b-carousel>
     <b-container>
-      <!-- <TabFilter
-        class="my-4"
-        :options="filters"
-        :selected-option="selectedFilter"
-        @click="setFilter"
-      /> -->
       <div class="product-list mt-5">
         <client-only>
           <swiper class="swiper" :options="swiperOption">
