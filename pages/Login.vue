@@ -4,38 +4,6 @@
     <div v-else class="login">
       <div class="login__container container">
         <div class="login__container__mail mail">
-          <!-- <Heading class="sso__heading">Masuk dengan</Heading>
-          <div class="container w-100">
-            <div class="row">
-              <SingleSignOn
-                type="button"
-                align="center"
-                class="btn_sso col-12 col-md-6 mb-1 mx-auto"
-              >
-                <b-img
-                  left
-                  class="sso_btn_icon my-auto"
-                  src="~/assets/icons/ic_facebook.svg"
-                  alt="icon facebook"
-                ></b-img>
-                FACEBOOK</SingleSignOn
-              >
-              <SingleSignOn
-                type="button"
-                align="center"
-                class="btn_sso col-12 col-md-6 mb-1 mx-auto"
-              >
-                <b-img
-                  left
-                  class="sso_btn_icon"
-                  src="~/assets/icons/ic_google.svg"
-                  alt="icon google"
-                ></b-img>
-                GOOGLE</SingleSignOn
-              >
-            </div>
-          </div>
-          <div class="atau__heading">ATAU</div> -->
           <Heading class="mail__heading">Masuk dengan email</Heading>
           <form class="mail__form" @submit.prevent="onSubmit()">
             <div class="container w-100">
@@ -142,10 +110,10 @@ export default {
       if (!this.$v.form.$invalid) {
         this.isLoading = true
         try {
-          const resp = await this.$axios.$post('/api/auth/login', this.form)
+          const resp = await this.$axios.$post('/api/auth/logina', this.form)
 
           this.$cookies.set(
-            '__vmctHarimau',
+            '__vmctSinga',
             JSON.stringify(resp.data),
             resp.data.expires_in
           )

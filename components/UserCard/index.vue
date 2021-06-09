@@ -121,7 +121,6 @@ export default {
 
 .dropdownku {
   border-left: 2px solid blackBlur;
-
   .btn-secondary {
     background: none;
   }
