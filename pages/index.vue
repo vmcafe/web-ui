@@ -26,13 +26,13 @@
       </b-carousel-slide>
     </b-carousel>
     <b-container>
-      <TabFilter
+      <!-- <TabFilter
         class="my-4"
         :options="filters"
         :selected-option="selectedFilter"
         @click="setFilter"
-      />
-      <div class="product-list">
+      /> -->
+      <div class="product-list mt-5">
         <client-only>
           <swiper class="swiper" :options="swiperOption">
             <swiper-slide v-for="item in dataSource" :key="item">
@@ -48,6 +48,33 @@
             <div class="swiper-button-next" slot="button-next"></div>
           </swiper>
         </client-only>
+      </div>
+      <div class="carousel_bawah mt-5">
+        <b-carousel
+          id="carousel-banner"
+          v-model="slide"
+          :interval="5000"
+          controls
+          indicators
+          background="#ababab"
+          img-width="1024"
+          img-height="480"
+          style="text-shadow: 1px 1px 2px #333"
+          @sliding-start="onSlideStart"
+          @sliding-end="onSlideEnd"
+        >
+          <b-carousel-slide v-for="item in [1, 2, 3, 4]" :key="item">
+            <template #img>
+              <img
+                class="d-block img-fluid w-100"
+                width="1024"
+                height="480"
+                :src="require(`~/assets/banner${item}.jpg`)"
+                alt="image slot"
+              />
+            </template>
+          </b-carousel-slide>
+        </b-carousel>
       </div>
       <!-- <div class="article-top">
         <client-only>
@@ -66,7 +93,7 @@
           </swiper>
         </client-only>
       </div> -->
-      <div class="article mb-5">
+      <div class="article mt-5 mb-5">
         <div class="article__heading py-4 pl-2">ARTIKEL TERBARU</div>
         <b-row class="article__content px-5">
           <b-col v-for="item in dataArticle" :key="item" sm="12" md="6">
@@ -80,13 +107,11 @@
 
 <script>
 import { Swiper, SwiperSlide } from 'vue-awesome-swiper'
-import TabFilter from '@/components/TabFilter'
 import ProductCard from '@/components/Cards/ProductCard'
 import ArticleCard from '@/components/Cards/ArticleCard'
 
 export default {
   components: {
-    TabFilter,
     ProductCard,
     Swiper,
     SwiperSlide,
@@ -146,29 +171,6 @@ export default {
       },
       sliding: null,
       slide: 0,
-      filters: [
-        {
-          id: 0,
-          label: 'all',
-          value: 0,
-        },
-        {
-          id: 1,
-          label: 'Salt',
-          value: 1,
-        },
-        {
-          id: 2,
-          label: 'Sweet',
-          value: 2,
-        },
-        {
-          id: 3,
-          label: 'Bundle',
-          value: 3,
-        },
-      ],
-      selectedFilter: 0,
     }
   },
   created() {
@@ -207,9 +209,6 @@ export default {
     },
     onSlideEnd(slide) {
       this.sliding = false
-    },
-    setFilter($event) {
-      this.selectedFilter = $event
     },
   },
 }
