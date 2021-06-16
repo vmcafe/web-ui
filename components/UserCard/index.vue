@@ -22,7 +22,7 @@
       </div>
     </template>
     <b-dropdown-item class="usercard__extended">
-      <nuxt-link to="/me">
+      <nuxt-link to="/biodata">
         <div class="usercard__extended__item my-2">Profil</div>
       </nuxt-link>
     </b-dropdown-item>
@@ -128,34 +128,36 @@ export default {
 }
 
 .usercard__extended {
-  background-color: skinPrimary !important
+  background-color: skinPrimary !important;
 }
 
 .isi_pertanyaan {
-  font-size 30px
-  font normal normal Proxima Nova
-  letter-spacing 0.7px
-  color #2D4957
+  font-size: 30px;
+  font: normal normal Proxima Nova;
+  letter-spacing: 0.7px;
+  color: #2D4957;
 }
 
 .pertanyaan {
-  border-bottom 1px solid #00000061
+  border-bottom: 1px solid #00000061;
 }
 
-.btn_keluar_modal
-  background #F6F6F6
+.btn_keluar_modal {
+  background: #F6F6F6;
   border-radius: 5px;
-  opacity 1
-  font-size 20px
-  font normal normal Proxima Nova
-  letter-spacing 1.8px
-  color  #2D4957
+  opacity: 1;
+  font-size: 20px;
+  font: normal normal Proxima Nova;
+  letter-spacing: 1.8px;
+  color: #2D4957;
+}
 
-.btn_batal_modal
-  background #B14141
-  font-size 20px
+.btn_batal_modal {
+  background: #B14141;
+  font-size: 20px;
   border-radius: 5px;
-  font normal normal Proxima Nova
-  letter-spacing 1.8px
-  color #f6f6f6
+  font: normal normal Proxima Nova;
+  letter-spacing: 1.8px;
+  color: #f6f6f6;
+}
 </style>

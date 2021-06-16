@@ -27,7 +27,7 @@
                       src="~/assets/icons/ic_trashcan.svg"
                       alt=""
                     />
-                    <div class="counter">
+                    <!-- <div class="counter">
                       <button
                         class="counter__minus"
                         :disabled="count < 2"
@@ -39,7 +39,7 @@
                       <button class="counter__plus" @click="count += 1">
                         +
                       </button>
-                    </div>
+                    </div> -->
                   </b-row>
                 </b-col>
               </b-row>
@@ -51,8 +51,6 @@
             <h1 class="tittle__rincian__belanja h1 font-weight-medium mb-4">
               RINCIAN BELANJA
             </h1>
-            <div class="isi__rincian__belanja mb-3"></div>
-
             <div class="rincian__pembayaran">
               <div class="rincian_pembayaran_barang">
                 <b-row>
