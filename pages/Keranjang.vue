@@ -38,8 +38,6 @@
             <h1 class="tittle__rincian__belanja h1 font-weight-medium mb-4">
               RINCIAN BELANJA
             </h1>
-            <div class="isi__rincian__belanja mb-3"></div>
-
             <div class="rincian__pembayaran">
               <div class="rincian_pembayaran_barang">
                 <b-row>
