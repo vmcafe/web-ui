@@ -19,7 +19,7 @@
                     <p>{{ item.products.name }}</p>
                   </div>
                   <div class="harga_product">
-                    <p>Rp{{ item.cost }}</p>
+                    <p>Rp {{ item.cost }}</p>
                   </div>
                   <b-row>
                     <img
@@ -27,26 +27,13 @@
                       src="~/assets/icons/ic_trashcan.svg"
                       alt=""
                     />
-                    <div class="counter">
-                      <button
-                        class="counter__minus"
-                        :disabled="count < 2"
-                        @click="count -= 1"
-                      >
-                        -
-                      </button>
-                      <div class="counter__content">{{ item.quantity }}</div>
-                      <button class="counter__plus" @click="count += 1">
-                        +
-                      </button>
-                    </div>
                   </b-row>
                 </b-col>
               </b-row>
             </b-card>
           </div>
         </b-col>
-        <b-col v-for="item in dataSource" :key="item.id">
+        <b-col v-for="item in dataOrder" :key="item.id">
           <b-container class="card__rincian__belanja">
             <h1 class="tittle__rincian__belanja h1 font-weight-medium mb-4">
               RINCIAN BELANJA
@@ -60,7 +47,7 @@
                     <p>Total Harga (barang)</p>
                   </b-col>
                   <b-col cols="4" class="rincian_pembayaranbarang_kanan">
-                    <p>Rp{{ item.cost }}</p>
+                    <p>Rp {{ item.total }}</p>
                   </b-col>
                 </b-row>
               </div>
@@ -70,38 +57,34 @@
                     <p>Total Harga</p>
                   </b-col>
                   <b-col cols="6" class="total_pembayaran_kanan">
-                    <p>Rp{{ item.cost }}</p>
+                    <p>Rp {{ item.total }}</p>
                   </b-col>
                 </b-row>
                 <b-row>
-                  <router-link class="w-100 mt-2" :to="'/detailpengiriman'">
-                    <b-button class="button_bayar_content w-100 mt-2">
+                  <form class="mail__form" @click="buyHandler()">
+                    <Button
+                      align="center"
+                      class="form__submit w-full mt-1 mb-4 w-100"
+                      >MASUK</Button
+                    >
+                  </form>
+                </b-row>
+                <!-- <router-link class="w-100 mt-2" :to="'/detailpengiriman'">
+                    <b-button
+                      type="submit"
+                      class="button_bayar_content w-100 mt-2"
+                      @click="buyHandler()"
+                    >
                       Beli
                     </b-button>
-                  </router-link>
-                </b-row>
+                  </router-link> -->
               </div>
             </div>
           </b-container>
         </b-col>
       </b-row>
       <b-row>
-        <div class="slide__wishlist">
-          <div class="detail__slide__label mt-5 mb-2">
-            COBAIN BARANG DI WISHLIST
-          </div>
-          <slick :options="slickOptions">
-            <b-row>
-              <b-col
-                class="favorite"
-                v-for="item in [1, 2, 3, 4, 5]"
-                :key="item"
-              >
-                <ProductCard name="Sumpia" price="Rp.120000" />
-              </b-col>
-            </b-row>
-          </slick>
-        </div>
+        <div class="slide__wishlist"></div>
       </b-row>
     </b-container>
     <Footer />
@@ -110,18 +93,17 @@
 
 <script>
 import Navbar from '@/components/Navbar'
-import ProductCard from '@/components/Cards/ProductCard'
 import Footer from '@/components/Footer'
 export default {
   components: {
     Navbar,
-    ProductCard,
     Footer,
   },
   data() {
     return {
       dataSource: null,
-      count: 1,
+      dataOrder: null,
+      dataCart: null,
       isLoading: false,
       headers: {
         'Content-Type': 'application/json',
@@ -133,18 +115,40 @@ export default {
   },
   created() {
     this.fetchData()
+    this.listTotal()
   },
   methods: {
     async fetchData() {
-      this.isLoading = true
       try {
         const resp = await this.$axios.$get(`/api/cart`, {
           headers: this.headers,
         })
         this.dataSource = resp.data
+      } catch (error) {
+        console.log(error)
+      }
+    },
+    async listTotal() {
+      this.isLoading = true
+      try {
+        const resp = await this.$axios.$get(`/api/cart/total`, {
+          headers: this.headers,
+        })
+        this.dataOrder = resp.data
         this.isLoading = false
       } catch (error) {
-        this.$toast.error('Gagal mendapatkan data user').goAway(3000) // if user need to know
+        this.$toast.error('Gagal mendapatkan data order').goAway(3000) // if user need to know
+        this.isLoading = false
+      }
+    },
+    async buyHandler() {
+      try {
+        const resp = await this.$axios.$post(`/api/order/pivot`, null, {
+          headers: this.headers,
+        })
+        this.dataCart = resp.data
+      } catch (error) {
+        console.log(error)
         this.isLoading = false
       }
     },
