@@ -37,32 +37,148 @@
       </div>
       <div v-if="state === 1">
         <b-card class="card__biodata mb-2">
-          <b-row>
-            <b-button
-              :class="`button__ubah ${isEdit && 'button__ubah__clicked'}`"
-              type="button"
-              @click="isEdit = !isEdit"
-            >
-              {{ isEdit ? 'SIMPAN' : 'UBAH' }}
-            </b-button>
-          </b-row>
           <b-row v-for="item in dataSource" :key="item.id">
-            <div class="avatar">
-              <b-col class="relative__profile">
-                <b-avatar
-                  class="profile__avatar mb-2 mx-auto"
-                  src="https://placekitten.com/300/300"
-                  size="12rem"
-                ></b-avatar>
-                <div class="absolute__profile">
+            <div class="ubah_profile">
+              <b-button class="button__ubah mx-auto" v-b-modal.modal-1
+                >UBAH</b-button
+              >
+              <b-modal
+                class="modal_ubah_profile"
+                id="modal-1"
+                title="BootstrapVue"
+                ref="my-modal"
+                hide-header
+                hide-footer
+                size="md"
+              >
+                <div class="icon_close text-right">
                   <b-img
-                    :class="`profile__ubah ${isEdit && 'profile__ubah__show'}`"
-                    src="~/assets/edit_profile.png"
+                    src="~/assets/Exit_icon.svg"
                     alt=""
-                    width="45px"
+                    width="25px"
+                    @click="hideModal"
                   ></b-img>
                 </div>
-              </b-col>
+                <div class="d-block text-center">
+                  <h1 class="judul_tambah_alamat mt-2">Ubah Profile</h1>
+                </div>
+                <div class="form_modal pt-4 pb-2 px-2">
+                  <form
+                    class="form_modal pt-4 pb-2 px-2"
+                    @submit.stop.prevent="ubahProfile"
+                  >
+                    <div class="row">
+                      <div class="col-12">
+                        <label for="nama" class="label_modal col-12 mb-1 pt-2"
+                          >Nama</label
+                        >
+                        <Field
+                          class="col-12 mb-2 field_input"
+                          type="text"
+                          placeholder="Yudistryan Izhar"
+                          :value="$v.formProfile.name.$model"
+                          :error="
+                            $v.formProfile.name.$dirty &&
+                            $v.formProfile.name.$error
+                          "
+                          @model="$v.formProfile.name.$model = $event"
+                        />
+                      </div>
+                      <div class="col-12">
+                        <label for="birth" class="label_modal col-12 mb-1 pt-2"
+                          >Tanggal Lahir</label
+                        >
+                        <Field
+                          class="col-12 mb-2 field_input"
+                          type="text"
+                          placeholder="YYYY-DD-MM"
+                          :value="$v.formProfile.birth.$model"
+                          :error="
+                            $v.formProfile.birth.$dirty &&
+                            $v.formProfile.birth.$error
+                          "
+                          @model="$v.formProfile.birth.$model = $event"
+                        />
+                      </div>
+                      <div class="col-12">
+                        <label for="email" class="label_modal col-12 mb-1 pt-2"
+                          >Email</label
+                        >
+                        <Field
+                          class="col-12 mb-2 field_input"
+                          type="text"
+                          placeholder="nama@gmail.com"
+                          :value="$v.formProfile.email.$model"
+                          :error="
+                            $v.formProfile.email.$dirty &&
+                            $v.formProfile.email.$error
+                          "
+                          @model="$v.formProfile.email.$model = $event"
+                        />
+                      </div>
+                      <div class="col-12">
+                        <label for="gender" class="label_modal col-12 mb-1 pt-2"
+                          >Jenis Kelamin</label
+                        >
+                        <Field
+                          class="col-12 mb-2 ml-auto field_input"
+                          type="text"
+                          placeholder="P/L"
+                          :value="$v.formProfile.gender.$model"
+                          :error="
+                            $v.formProfile.gender.$dirty &&
+                            $v.formProfile.gender.$error
+                          "
+                          @model="$v.formProfile.gender.$model = $event"
+                        />
+                      </div>
+                      <div class="col-12">
+                        <label for="no_hp" class="label_modal col-12 mb-1 pt-2"
+                          >No HP</label
+                        >
+                        <Field
+                          class="col-12 mb-2 field_input"
+                          type="text"
+                          placeholder="+62XXXXXXXXX"
+                          :value="$v.formProfile.phone.$model"
+                          :error="
+                            $v.formProfile.phone.$dirty &&
+                            $v.formProfile.phone.$error
+                          "
+                          @model="$v.formProfile.phone.$model = $event"
+                        />
+                      </div>
+                    </div>
+                    <div class="btn_modal text-center mb-3 mt-2">
+                      <b-button class="btn_tambah_modal" type="submit"
+                        >Ubah</b-button
+                      >
+                      <b-button class="btn_batal_modal" @click="hideModal"
+                        >Batal</b-button
+                      >
+                    </div>
+                  </form>
+                </div>
+              </b-modal>
+              <div class="avatar">
+                <b-col class="relative__profile">
+                  <b-avatar
+                    class="profile__avatar mb-2 mx-auto"
+                    src="https://placekitten.com/300/300"
+                    size="12rem"
+                  ></b-avatar>
+                  <div class="absolute__profile">
+                    <b-img
+                      :class="`profile__ubah ${
+                        isEdit && 'profile__ubah__show'
+                      }`"
+                      src="~/assets/edit_profile.png"
+                      alt=""
+                      width="45px"
+                    ></b-img>
+                  </div>
+                </b-col>
+              </div>
             </div>
             <b-col>
               <div class="form_group1">
@@ -884,6 +1000,13 @@ export default {
           this.$cookies.get('__vmctHarimau').access_token
         }`,
       },
+      formProfile: {
+        name: '',
+        birth: '',
+        email: '',
+        gender: '',
+        phone: '',
+      },
       form: {
         receiver: '',
         phone: '',
@@ -901,6 +1024,23 @@ export default {
     }
   },
   validations: {
+    formProfile: {
+      name: {
+        required,
+      },
+      birth: {
+        required,
+      },
+      email: {
+        required,
+      },
+      gender: {
+        required,
+      },
+      phone: {
+        required,
+      },
+    },
     form: {
       receiver: {
         required,
@@ -942,6 +1082,30 @@ export default {
     this.listOrder()
   },
   methods: {
+    async ubahProfile() {
+      this.$v.$touch()
+      if (!this.$v.formProfile.$invalid) {
+        this.isLoading = true
+        try {
+          const resp = await this.$axios.$post(
+            '/api/address/add',
+            this.formProfile,
+            {
+              headers: this.headers,
+            }
+          )
+          this.dataProfile = resp.data
+          setTimeout(() => {
+            location.reload()
+          }, 3000)
+        } catch (error) {
+          this.isLoading = false
+          console.log(error)
+        }
+      } else {
+        this.$toast.error('Ada yang salah dalam pengisian form').goAway(3000)
+      }
+    },
     async fetchData() {
       try {
         const resp = await this.$axios.$get(`/api/profile/get`, {
@@ -1036,8 +1200,7 @@ export default {
 
 .button__ubah {
   margin-top: -20px;
-  margin-left: auto;
-  margin-right: -5px;
+  margin-right: 100%;
   width: 133px;
   height: 52px;
   border-radius: 20px;
