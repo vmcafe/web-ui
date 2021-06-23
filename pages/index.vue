@@ -34,6 +34,7 @@
                 :id="item.id"
                 :name="item.name"
                 :price="item.price"
+                :image="item.photo"
                 @click="count += 1"
               />
             </swiper-slide>
