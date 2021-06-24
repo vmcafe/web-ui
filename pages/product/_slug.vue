@@ -1,13 +1,13 @@
 <template>
   <b-container class="detail">
-    <b-row>
+    <b-row :data="dataSource">
       <b-col md="5" sm="12">
         <b-img
           class="detail__img mx-auto mx-md-0"
-          src="https://maizo.com.au/imgs/product/m0258-sempio-gim-jaban-seasoned-seaweed-snack-50g.jpg"
+          :src="dataSource && dataSource[0] && dataSource[0].photo"
           alt="Gambar"
         />
-        <div class="detail__imgs mx-auto mx-md-0">
+        <!-- <div class="detail__imgs mx-auto mx-md-0">
           <b-row>
             <b-col v-for="item in [1, 2, 3, 4]" :key="item" cols="3">
               <b-img
@@ -18,20 +18,16 @@
               />
             </b-col>
           </b-row>
-        </div>
+        </div> -->
       </b-col>
       <b-col md="7" sm="12" class="pt-5">
-        <h1
-          class="detail__title text-center h1 font-weight-medium mb-4"
-          :data="dataSource"
-        >
+        <h1 class="detail__title text-center h1 font-weight-medium mb-4">
           {{ dataSource && dataSource[0] && dataSource[0].name }}
         </h1>
-        <Variant class="mb-5" :items="variants" :selected="selectedVariant" />
         <b-row>
           <b-col md="9" sm="12">
             <div
-              class="detail__description border-top border-bottom border-dark p-2 mb-3"
+              class="detail__description order-top border-bottom border-dark p-2 mb-3"
             >
               {{ dataSource && dataSource[0] && dataSource[0].description }}
             </div>
@@ -59,11 +55,20 @@
             <Counter class="mb-2" />
           </b-col>
           <b-col md="6" sm="6">
-            <router-link class="w-100 mb-2" :to="'/keranjang'">
+            <router-link class="w-100 mt-2" :to="'/keranjang'">
+              <b-button
+                type="submit"
+                class="detail__button w-100 mb-2"
+                @click="cartHandler()"
+              >
+                Beli
+              </b-button>
+            </router-link>
+            <!-- <router-link class="w-100 mb-2" :to="'/keranjang'" @click="buyHandler()">
               <b-button type="button" class="detail__button w-100 mb-2">
                 BELI LANGSUNG
               </b-button>
-            </router-link>
+            </router-link> -->
           </b-col>
           <b-col md="3" sm="6">
             <div class="d-flex flex-row align-items">
@@ -94,19 +99,15 @@
     </div>
 
     <div class="detail__slide mb-4">
-      <div class="detail__slide__label mt-5 mb-2">Produk Serupa</div>
-      <swiper class="swiper" :options="swiperOption">
-        <swiper-slide v-for="item in [1, 2, 3, 4, 5, 6, 7]" :key="item">
-          <ProductCard name="Sumpia" price="120000" />
-        </swiper-slide>
-      </swiper>
-    </div>
-
-    <div class="detail__slide mb-4">
       <div class="detail__slide__label mt-5 mb-2">Barangkali suka</div>
       <swiper class="swiper" :options="swiperOption">
-        <swiper-slide v-for="item in [1, 2, 3, 4, 5, 6, 7]" :key="item">
-          <ProductCard name="Sumpia" price="120000" />
+        <swiper-slide v-for="item in dataProduct" :key="item">
+          <ProductCard
+            :id="item.id"
+            :name="item.name"
+            :price="item.price"
+            :image="item.photo"
+          />
         </swiper-slide>
       </swiper>
     </div>
@@ -114,13 +115,11 @@
 </template>
 
 <script>
-import Variant from '@/components/Variant'
 import Counter from '@/components/CounterClick'
 import ProductCard from '@/components/Cards/ProductCard'
 
 export default {
   components: {
-    Variant,
     ProductCard,
     Counter,
   },
@@ -128,6 +127,8 @@ export default {
   data() {
     return {
       dataSource: null,
+      dataProduct: null,
+      dataCart: null,
       swiperOption: {
         slidesPerView: 5,
         freeMode: true,
@@ -146,25 +147,11 @@ export default {
           },
         },
       },
-      variants: [
-        {
-          label: 'Small',
-          value: 1,
-        },
-        {
-          label: 'Medium',
-          value: 2,
-        },
-        {
-          label: 'Large',
-          value: 3,
-        },
-      ],
-      selectedVariant: 1,
     }
   },
   created() {
     this.fetchData()
+    this.getdata()
   },
   methods: {
     async fetchData() {
@@ -175,6 +162,25 @@ export default {
         this.dataSource = resp.data
       } catch (error) {
         console.log(error)
+      }
+    },
+    async getdata() {
+      try {
+        const resp = await this.$axios.$get(`/api/product`)
+        this.dataProduct = resp.data
+      } catch (error) {
+        console.log(error)
+      }
+    },
+    async cartHandler() {
+      try {
+        const resp = await this.$axios.$post(`/api/cart`, null, {
+          headers: this.headers,
+        })
+        this.dataCart = resp.data
+      } catch (error) {
+        console.log(error)
+        this.isLoading = false
       }
     },
   },

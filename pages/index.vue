@@ -92,7 +92,12 @@
         <div class="article__heading py-4 pl-2">ARTIKEL TERBARU</div>
         <b-row class="article__content px-5">
           <b-col v-for="item in dataArticle" :key="item" sm="12" md="6">
-            <ArticleCard />
+            <ArticleCard
+              :image="item.photo"
+              :name="item.name"
+              :description="item.description"
+              :link="item.link"
+            />
           </b-col>
         </b-row>
       </div>
@@ -199,6 +204,7 @@ export default {
         console.log(error)
       }
     },
+
     onSlideStart(slide) {
       this.sliding = true
     },
@@ -234,7 +240,7 @@ export default {
   background: url('~/assets/bg.svg') no-repeat;
   background-size: contain;
 
-  @media (max-width: 1024px) {
+  @media (max-width: 1920px) {
     background: skinPrimary;
   }
 

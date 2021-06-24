@@ -59,23 +59,23 @@
                   </b-col>
                 </b-row>
                 <b-row>
-                  <form class="mail__form" @click="buyHandler()">
+                  <!-- <form class="mail__form" @click="buyHandler()">
                     <Button
                       align="center"
                       class="form__submit w-full mt-1 mb-4 w-100"
                       >MASUK</Button
                     >
-                  </form>
+                  </form> -->
                 </b-row>
-                <!-- <router-link class="w-100 mt-2" :to="'/detailpengiriman'">
-                    <b-button
-                      type="submit"
-                      class="button_bayar_content w-100 mt-2"
-                      @click="buyHandler()"
-                    >
-                      Beli
-                    </b-button>
-                  </router-link> -->
+                <router-link class="w-100 mt-2" :to="'/detailpengiriman'">
+                  <b-button
+                    type="submit"
+                    class="button_bayar_content w-100 mt-2"
+                    @click="buyHandler()"
+                  >
+                    Beli
+                  </b-button>
+                </router-link>
               </div>
             </div>
           </b-container>

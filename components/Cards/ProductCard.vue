@@ -1,29 +1,14 @@
 <template>
   <div class="product">
-    <b-img thumbnail :src="image" alt="Gambar" class="product__img" />
-    <div class="product__content">
-      <div class="product__content__name text-center mb-1 text-truncate">
-        <!-- <nuxt-link :to="'/product/' + id">
-          <TextLink class="lupa_kata_kunci mb-4">{{ name }}</TextLink>
-        </nuxt-link> -->
-        <router-link class="lupa_kata_kunci mb-4" :to="'/product/' + id">{{
-          name
-        }}</router-link>
+    <router-link :to="'/product/' + id">
+      <b-img :src="image" alt="Gambar" class="product__img" />
+      <div class="product__content">
+        <div class="product__content__name text-center mb-1 text-truncate">
+          {{ name }}
+          <div class="product__content__price text-center">{{ price }}</div>
+        </div>
       </div>
-      <div class="product__content__price text-center">{{ price }}</div>
-    </div>
-    <img
-      @click="$emit('click')"
-      class="product__icon"
-      src="~/assets/icons/ic_cart.svg"
-      alt=""
-    />
-    <img
-      v-if="love"
-      class="product__favorite"
-      src="~/assets/heart.png"
-      alt=""
-    />
+    </router-link>
   </div>
 </template>
 
@@ -68,21 +53,6 @@ export default {
       letter-spacing: 0.25px;
       color: #4AB4A2;
     }
-  }
-
-  &__icon {
-    position: absolute;
-    right: 12px;
-    bottom: 12px;
-    width: 18px;
-    height: 18px;
-  }
-
-  &__favorite {
-    position: absolute;
-    left: 12px;
-    bottom: 12px;
-    width: 18px;
   }
 }
 </style>
